@@ -2,15 +2,20 @@ package armory.logicnode;
 
 class TestNode extends LogicNode {
 
+	var c = false;
+
 	public function new(tree:LogicTree) {
 		super(tree);
+		tree.notifyOnUpdate(update);
 	}
 
 	override function run() {
-		// Logic for this node
-		trace("Hello, World!");
+		c = true;
+		}
 
-		// Execute next action linked to this node
-		super.run();
-	}
+	function update() {
+		if (!c) super.run();
+		c = false;
+		}		
+	
 }
