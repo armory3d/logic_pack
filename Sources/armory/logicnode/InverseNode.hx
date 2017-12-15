@@ -1,6 +1,6 @@
 package armory.logicnode;
 
-class TestNode extends LogicNode {
+class InverseNode extends LogicNode {
 
 	var c = false;
 
@@ -11,11 +11,10 @@ class TestNode extends LogicNode {
 
 	override function run() {
 		c = true;
-		}
+	}
 
 	function update() {
 		if (!c) super.run();
 		c = false;
-		}		
-	
+	}
 }

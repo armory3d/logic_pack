@@ -2,9 +2,9 @@ from bpy.types import Node
 from arm.logicnode.arm_nodes import *
 import arm.nodes_logic
 
-class Inverse(Node, ArmLogicTreeNode):
-    '''Test node'''
-    bl_idname = 'LNTestNode'
+class InverseNode(Node, ArmLogicTreeNode):
+    '''Inverse node'''
+    bl_idname = 'LNInverseNode'
     bl_label = 'Inverse'
     bl_icon = 'GAME'
 
@@ -14,6 +14,6 @@ class Inverse(Node, ArmLogicTreeNode):
 
 def register():
     # Add custom nodes
-    add_node(Inverse, category='Action')
+    add_node(InverseNode, category='Action')
     # Register newly added nodes
     arm.nodes_logic.register_nodes()
