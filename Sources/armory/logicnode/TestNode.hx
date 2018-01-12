@@ -2,20 +2,30 @@ package armory.logicnode;
 
 class TestNode extends LogicNode {
 
-	var c = false;
+	var cond = false;
+	var condmin = false;
+	var condmax = false;
 
 	public function new(tree:LogicTree) {
 		super(tree);
-		tree.notifyOnUpdate(update);
 	}
 
 	override function run() {
-		c = true;
-		}
+		// Logic for this node
+		var realvariable = inputs[1];
+		var variable:Dynamic = inputs[1].get();
+		var minimum:Dynamic = inputs[2].get();
+		var maximum:Dynamic = inputs[3].get();
 
-	function update() {
-		if (!c) super.run();
-		c = false;
-		}		
-	
+		condmin = minimum>variable;
+		condmax = maximum<variable;
+		
+		if (condmin)
+			realvariable.set(minimum);
+			
+		if (condmax)
+			realvariable.set(maximum);
+
+		super.run();
+	}
 }
