@@ -1,6 +1,6 @@
 package armory.logicnode;
 
-class minmaxnode extends LogicNode {
+class Minmaxnode extends LogicNode {
 
 	var cond = false;
 	var condmin = false;

@@ -12,14 +12,18 @@ class ToBool(Node, ArmLogicTreeNode):
         self.inputs.new('ArmNodeSocketAction', 'In')
         self.outputs.new('NodeSocketBool', 'Bool')
 
-class minmaxnode(Node, ArmLogicTreeNode):
+class Minmaxnode(Node, ArmLogicTreeNode):
     '''Min/Max Node'''
-    bl_idname = 'LNminmaxnode'
-    bl_label = 'minmaxnode'
+    bl_idname = 'LNMinmaxnode'
+    bl_label = 'MinMax'
     bl_icon = 'GAME'
 
     def init(self, context):
         self.inputs.new('ArmNodeSocketAction', 'In')
+        self.inputs.new('NodeSocketShader', 'Value')
+        self.inputs.new('NodeSocketShader', 'Value')
+        self.inputs.new('NodeSocketShader', 'Value')
+        self.outputs.new('ArmNodeSocketAction', 'Out')
 
 class InverseNode(Node, ArmLogicTreeNode):
     '''Inverse node'''
@@ -29,12 +33,12 @@ class InverseNode(Node, ArmLogicTreeNode):
 
     def init(self, context):
         self.inputs.new('ArmNodeSocketAction', 'In')
-self.outputs.new('ArmNodeSocketAction', 'Out')
+        self.outputs.new('ArmNodeSocketAction', 'Out')
 
 def register():
     # Add custom nodes
     add_node(ToBool, category='Logic')
-    add_node(minmaxnode, category='Variable')
+    add_node(Minmaxnode, category='Variable')
     add_node(InverseNode, category='Logic')
     # Register newly added nodes
     arm.nodes_logic.register_nodes()
