@@ -25,6 +25,8 @@ class Minmaxnode(Node, ArmLogicTreeNode):
         self.inputs.new('NodeSocketShader', 'Value')
         self.outputs.new('ArmNodeSocketAction', 'Out')
 
+
+
 class InverseNode(Node, ArmLogicTreeNode):
     '''Inverse node'''
     bl_idname = 'LNInverseNode'
@@ -37,8 +39,10 @@ class InverseNode(Node, ArmLogicTreeNode):
 
 def register():
     # Add custom nodes
+
     add_node(ToBool, category='Logic')
     add_node(Minmaxnode, category='Variable')
     add_node(InverseNode, category='Logic')
+
     # Register newly added nodes
     arm.nodes_logic.register_nodes()
