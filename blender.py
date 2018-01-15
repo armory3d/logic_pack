@@ -34,7 +34,7 @@ class InverseNode(Node, ArmLogicTreeNode):
     bl_icon = 'GAME'
 
     def init(self, context):
-        self.inputs.new('ArmNodeSocketAction', 'In')
+        elf.inputs.new('ArmNodeSocketAction', 'In')
         self.outputs.new('ArmNodeSocketAction', 'Out')
 
 def register():
