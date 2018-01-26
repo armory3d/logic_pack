@@ -1,6 +1,6 @@
 package armory.logicnode;
 
-class Minmaxnode extends LogicNode {
+class MinMaxNode extends LogicNode {
 
 	var cond = false;
 	var condmin = false;
@@ -17,8 +17,8 @@ class Minmaxnode extends LogicNode {
 		var minimum:Dynamic = inputs[2].get();
 		var maximum:Dynamic = inputs[3].get();
 
-		condmin = minimum>variable;
-		condmax = maximum<variable;
+		condmin = minimum > variable;
+		condmax = maximum < variable;
 		
 		if (condmin)
 			realvariable.set(minimum);

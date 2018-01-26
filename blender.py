@@ -36,19 +36,33 @@ class LookNode(Node, ArmLogicTreeNode):
         self.inputs.new('NodeSocketFloat', 'Maximum')
         self.outputs.new('ArmNodeSocketAction', 'Out')
 
-class ToBool(Node, ArmLogicTreeNode):
-    '''To Bool'''
-    bl_idname = 'LNToBool'
-    bl_label = 'ToBool'
+class ArrayLoopIndiceNode(Node, ArmLogicTreeNode):
+    '''ArrayLoop node avec indice'''
+    bl_idname = 'LNArrayLoopIndiceNode'
+    bl_label = 'Array Loop Indice'
+    bl_icon = 'CURVE_PATH'
+    
+    def init(self, context):
+        self.inputs.new('ArmNodeSocketAction', 'In')
+        self.inputs.new('NodeSocketShader', 'Array')
+        self.outputs.new('ArmNodeSocketAction', 'Loop')
+        self.outputs.new('NodeSocketInt', 'Value')
+        self.outputs.new('ArmNodeSocketAction', 'Done')
+        self.outputs.new('NodeSocketInt', 'Indice')
+
+class ToBoolNode(Node, ArmLogicTreeNode):
+    '''To Bool Node'''
+    bl_idname = 'LNToBoolNode'
+    bl_label = 'To Bool'
     bl_icon = 'GAME'
 
     def init(self, context):
         self.inputs.new('ArmNodeSocketAction', 'In')
         self.outputs.new('NodeSocketBool', 'Bool')
 
-class Minmaxnode(Node, ArmLogicTreeNode):
+class MinMaxNode(Node, ArmLogicTreeNode):
     '''Min/Max Node'''
-    bl_idname = 'LNMinmaxnode'
+    bl_idname = 'LNMinMaxNode'
     bl_label = 'MinMax'
     bl_icon = 'GAME'
 
@@ -58,8 +72,6 @@ class Minmaxnode(Node, ArmLogicTreeNode):
         self.inputs.new('NodeSocketShader', 'Value')
         self.inputs.new('NodeSocketShader', 'Value')
         self.outputs.new('ArmNodeSocketAction', 'Out')
-
-
 
 class InverseNode(Node, ArmLogicTreeNode):
     '''Inverse node'''
@@ -74,8 +86,9 @@ class InverseNode(Node, ArmLogicTreeNode):
 def register():
     # Add custom nodes
     add_node(TranslateOnLocalAxisNode, category='Action')
-    add_node(ToBool, category='Logic')
-    add_node(Minmaxnode, category='Variable')
+    add_node(ArrayLoopIndiceNode, category='Logic')
+    add_node(ToBoolNode, category='Logic')
+    add_node(MinMaxNode, category='Variable')
     add_node(InverseNode, category='Logic')
     add_node(LookNode, category='Action')
 
