@@ -28,6 +28,4 @@ class ArrayLoopIndiceNode extends LogicNode {
 		else return index;
 		
 	}
-
-	
 }
