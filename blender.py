@@ -31,22 +31,6 @@ class SeparateQuatNode(Node, ArmLogicTreeNode):
         self.outputs.new('NodeSocketFloat', 'W')
         self.outputs.new('NodeSocketVector', 'Euler')
 
-class TranslateOnLocalAxisNode(Node, ArmLogicTreeNode):
-    '''TranslateOnLocalAxisNode'''
-    bl_idname = 'LNTranslateOnLocalAxisNode'
-    bl_label = 'Translate On Local Axis'
-    bl_icon = 'GAME'
-   
-
-    def init(self, context):
-        self.inputs.new('ArmNodeSocketAction', 'In')
-        self.inputs.new('ArmNodeSocketObject', 'Object')
-        self.inputs.new('NodeSocketFloat', 'Speed')
-        self.inputs.new('NodeSocketInt', 'Forward/Up/Right')
-        self.inputs.new('NodeSocketBool', 'Inverse')
-        self.outputs.new('ArmNodeSocketAction', 'Out')
-
-
 class LookNode(Node, ArmLogicTreeNode):
     '''Look Node'''
     bl_idname = 'LNLookNode'
@@ -77,16 +61,6 @@ class ArrayLoopIndiceNode(Node, ArmLogicTreeNode):
         self.outputs.new('ArmNodeSocketAction', 'Done')
         self.outputs.new('NodeSocketInt', 'Indice')
 
-class ToBoolNode(Node, ArmLogicTreeNode):
-    '''To Bool Node'''
-    bl_idname = 'LNToBoolNode'
-    bl_label = 'To Bool'
-    bl_icon = 'GAME'
-
-    def init(self, context):
-        self.inputs.new('ArmNodeSocketAction', 'In')
-        self.outputs.new('NodeSocketBool', 'Bool')
-
 class MinMaxNode(Node, ArmLogicTreeNode):
     '''Min/Max Node'''
     bl_idname = 'LNMinMaxNode'
@@ -100,25 +74,12 @@ class MinMaxNode(Node, ArmLogicTreeNode):
         self.inputs.new('NodeSocketShader', 'Value')
         self.outputs.new('ArmNodeSocketAction', 'Out')
 
-class InverseNode(Node, ArmLogicTreeNode):
-    '''Inverse node'''
-    bl_idname = 'LNInverseNode'
-    bl_label = 'Inverse'
-    bl_icon = 'GAME'
-
-    def init(self, context):
-        self.inputs.new('ArmNodeSocketAction', 'In')
-        self.outputs.new('ArmNodeSocketAction', 'Out')
-
 def register():
     # Add custom nodes
     add_node(QuatToEulerNode, category= 'Value')
     add_node(SeparateQuatNode, category='Value')
-    add_node(TranslateOnLocalAxisNode, category='Action')
     add_node(ArrayLoopIndiceNode, category='Logic')
-    add_node(ToBoolNode, category='Logic')
     add_node(MinMaxNode, category='Variable')
-    add_node(InverseNode, category='Logic')
     add_node(LookNode, category='Action')
 
     # Register newly added nodes
