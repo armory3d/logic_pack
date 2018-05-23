@@ -52,7 +52,7 @@ class ArrayLoopIndiceNode(Node, ArmLogicTreeNode):
     bl_idname = 'LNArrayLoopIndiceNode'
     bl_label = 'Array Loop Indice'
     bl_icon = 'CURVE_PATH'
-    
+
     def init(self, context):
         self.inputs.new('ArmNodeSocketAction', 'In')
         self.inputs.new('NodeSocketShader', 'Array')
@@ -74,6 +74,69 @@ class MinMaxNode(Node, ArmLogicTreeNode):
         self.inputs.new('NodeSocketShader', 'Value')
         self.outputs.new('ArmNodeSocketAction', 'Out')
 
+class FirstPersonController(Node, ArmLogicTreeNode):
+	'''FirstPersonController'''
+	bl_idname = 'LNFirstPersonController'
+	bl_label = 'First Person Controller'
+	bl_icon = 'GAME'
+
+	def init(self, context):
+		self.outputs.new('ArmNodeSocketAction', 'Out')
+
+		self.inputs.new('ArmNodeSocketAction', 'Activate')
+
+		self.inputs.new('ArmNodeSocketObject', 'Player Object')
+		self.inputs[-1].default_value = 'Player'
+
+		self.inputs.new('NodeSocketFloat', 'Overall Speed Modifier')
+		self.inputs[-1].default_value = 1.0
+
+		self.inputs.new('NodeSocketBool', 'Forward')
+		self.inputs.new('NodeSocketFloat', 'Forward Speed')
+		self.inputs[-1].default_value = 1.0
+
+		self.inputs.new('NodeSocketBool', 'Left')
+		self.inputs.new('NodeSocketFloat', 'Left Speed')
+		self.inputs[-1].default_value = 1.0
+
+		self.inputs.new('NodeSocketBool', 'Right')
+		self.inputs.new('NodeSocketFloat', 'Right Speed')
+		self.inputs[-1].default_value = 1.0
+
+		self.inputs.new('NodeSocketBool', 'Reverse')
+		self.inputs.new('NodeSocketFloat', 'Reverse Speed')
+		self.inputs[-1].default_value = 1.0
+
+		self.inputs.new('NodeSocketBool', 'Jump')
+		self.inputs.new('NodeSocketFloat', 'Jump Height')
+		self.inputs[-1].default_value = 1.0
+
+		self.inputs.new('NodeSocketBool', 'Run')
+		self.inputs.new('NodeSocketFloat', 'Run Multiplier')
+		self.inputs[-1].default_value = 1.5
+
+		self.inputs.new('ArmNodeSocketObject', 'Camera Object')
+		self.inputs[-1].default_value = 'Camera'
+
+		self.inputs.new('NodeSocketFloat', 'Speed Modifier')
+		self.inputs[-1].default_value = 1.0
+		self.inputs.new('NodeSocketBool', 'Invert Vertical')
+		self.inputs.new('NodeSocketBool', 'Invert Horizontal')
+
+		self.inputs.new('NodeSocketFloat', 'Horizontal Axis Movement')
+		self.inputs.new('NodeSocketFloat', 'Horiontal Speed')
+		self.inputs[-1].default_value = 1.0
+		self.inputs.new('NodeSocketBool', 'Restrict Horizontal')
+		self.inputs.new('NodeSocketFloat', 'hMin (Radians)')
+		self.inputs.new('NodeSocketFloat', 'hMax (Radians)')
+
+		self.inputs.new('NodeSocketFloat', 'Vertical Axis Movement')
+		self.inputs.new('NodeSocketFloat', 'Vertical Speed')
+		self.inputs[-1].default_value = 1.0
+		self.inputs.new('NodeSocketBool', 'Restrict Vertical')
+		self.inputs.new('NodeSocketFloat', 'vMin (Radians)')
+		self.inputs.new('NodeSocketFloat', 'vMax (Radians)')
+
 def register():
     # Add custom nodes
     add_node(QuatToEulerNode, category= 'Value')
@@ -81,6 +144,7 @@ def register():
     add_node(ArrayLoopIndiceNode, category='Logic')
     add_node(MinMaxNode, category='Variable')
     add_node(LookNode, category='Action')
+	add_node(FirstPersonController, category='Action')
 
     # Register newly added nodes
     arm.nodes_logic.register_nodes()
