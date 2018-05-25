@@ -74,10 +74,10 @@ class MinMaxNode(Node, ArmLogicTreeNode):
         self.inputs.new('NodeSocketShader', 'Value')
         self.outputs.new('ArmNodeSocketAction', 'Out')
 
-class FirstPersonController(Node, ArmLogicTreeNode):
-    '''FirstPersonController'''
-    bl_idname = 'LNFirstPersonController'
-    bl_label = 'First Person Controller'
+class PlayerController(Node, ArmLogicTreeNode):
+    '''PlayerController'''
+    bl_idname = 'LNPlayerController'
+    bl_label = 'Player Controller'
     bl_icon = 'GAME'
 
     def init(self, context):
@@ -115,6 +115,24 @@ class FirstPersonController(Node, ArmLogicTreeNode):
         self.inputs.new('NodeSocketFloat', 'Run Multiplier')
         self.inputs[-1].default_value = 1.5
 
+        self.inputs.new('NodeSocketBool', 'Crouch')
+        self.inputs.new('NodeSocketFloat', 'Crouch Multiplier')
+        self.inputs[-1].default_value = 0.5
+
+class CameraController(Node, ArmLogicTreeNode):
+    '''CameraController'''
+    bl_idname = 'LNCameraController'
+    bl_label = 'Camera Controller'
+    bl_icon = 'GAME'
+
+    def init(self, context):
+        self.outputs.new('ArmNodeSocketAction', 'Out')
+
+        self.inputs.new('ArmNodeSocketAction', 'Activate')
+
+        self.inputs.new('ArmNodeSocketObject', 'Player Object')
+        self.inputs[-1].default_value = 'Player'
+
         self.inputs.new('ArmNodeSocketObject', 'Camera Object')
         self.inputs[-1].default_value = 'Camera'
 
@@ -145,7 +163,8 @@ def register():
     add_node(ArrayLoopIndiceNode, category='Logic')
     add_node(MinMaxNode, category='Variable')
     add_node(LookNode, category='Action')
-    add_node(FirstPersonController, category='Action')
+    add_node(PlayerController, category='Action')
+    add_node(CameraController, category='Action')
 
     # Register newly added nodes
     arm.nodes_logic.register_nodes()
