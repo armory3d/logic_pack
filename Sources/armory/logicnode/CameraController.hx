@@ -26,20 +26,22 @@ var e2:Vec4 = new Vec4();
 		var camera:Object = inputs[2].get();
 		var cameraSpeed:Float = inputs[3].get();
 
-		var invX:Bool = inputs[4].get();
-		var invY:Bool = inputs[5].get();
+		var mod:Bool = inputs[4].get();
+		var modVal:Float = inputs[5].get();
+		var invX:Bool = inputs[6].get();
+		var invY:Bool = inputs[7].get();
 
-		var horzMove:Float = inputs[6].get();
-		var horzSpeed:Float = inputs[7].get();
-		var horzRestr:Bool = inputs[8].get();
-		var horzMin:Float = inputs[9].get();
-		var horzMax:Float = inputs[10].get();
+		var horzMove:Float = inputs[8].get();
+		var horzSpeed:Float = inputs[9].get();
+		var horzRestr:Bool = inputs[10].get();
+		var horzMin:Float = inputs[11].get();
+		var horzMax:Float = inputs[12].get();
 
-		var vertMove:Float = inputs[11].get();
-		var vertSpeed:Float = inputs[12].get();
-		var vertRestr:Bool = inputs[13].get();
-		var vertMin:Float = inputs[14].get();
-		var vertMax:Float = inputs[15].get();
+		var vertMove:Float = inputs[13].get();
+		var vertSpeed:Float = inputs[14].get();
+		var vertRestr:Bool = inputs[15].get();
+		var vertMin:Float = inputs[16].get();
+		var vertMax:Float = inputs[17].get();
 
 		if(player == null || camera == null) return;
 
@@ -60,8 +62,13 @@ var e2:Vec4 = new Vec4();
 			e2.x = e2.x - camera.transform.rot.getEuler().z;
 		}
 
-		e1.x = e1.x + horzMove * horzSpeed * cameraSpeed * iron.system.Time.delta;
-		e2.y = e2.y + vertMove * vertSpeed * cameraSpeed * iron.system.Time.delta;
+		if(mod) {
+			e1.x = e1.x + horzMove * horzSpeed * cameraSpeed * modVal * iron.system.Time.delta;
+			e2.y = e2.y + vertMove * vertSpeed * cameraSpeed * modVal * iron.system.Time.delta;
+		} else {
+			e1.x = e1.x + horzMove * horzSpeed * cameraSpeed * iron.system.Time.delta;
+			e2.y = e2.y + vertMove * vertSpeed * cameraSpeed * iron.system.Time.delta;
+		}
 
 		if(horzRestr) {
 			if(-e1.x <= horzMin)

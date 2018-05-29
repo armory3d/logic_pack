@@ -116,6 +116,8 @@ class PlayerController(Node, ArmLogicTreeNode):
         self.inputs[-1].default_value = 1.5
 
         self.inputs.new('NodeSocketBool', 'Crouch')
+        self.inputs.new('NodeSocketBool', 'Hold for crouch')
+        self.inputs[-1].default_value = 1
         self.inputs.new('NodeSocketFloat', 'Crouch Multiplier')
         self.inputs[-1].default_value = 0.5
 
@@ -138,6 +140,9 @@ class CameraController(Node, ArmLogicTreeNode):
 
         self.inputs.new('NodeSocketFloat', 'Speed Modifier')
         self.inputs[-1].default_value = 1.0
+        self.inputs.new('NodeSocketBool', 'Additional Modifier (e.g. sniper)')
+        self.inputs.new('NodeSocketFloat', 'Modifier')
+        self.inputs[-1].default_value = 0.25
         self.inputs.new('NodeSocketBool', 'Invert Vertical')
         self.inputs.new('NodeSocketBool', 'Invert Horizontal')
 
@@ -155,6 +160,47 @@ class CameraController(Node, ArmLogicTreeNode):
         self.inputs.new('NodeSocketFloat', 'vMin (Radians)')
         self.inputs.new('NodeSocketFloat', 'vMax (Radians)')
 
+class AnimationControllerNode(Node, ArmLogicTreeNode):
+    '''AnimationController node'''
+    bl_idname = 'LNAnimationControllerNode'
+    bl_label = 'AnimationController'
+    bl_icon = 'GAME'
+
+    def __init__(self):
+        array_nodes[str(id(self))] = self
+
+    def init(self, context):
+        self.outputs.new('ArmNodeSocketAction', 'Out')
+        self.outputs.new('ArmNodeSocketAction', 'Done')
+        
+        self.inputs.new('ArmNodeSocketAction', 'In')
+        self.inputs.new('ArmNodeSocketObject', 'Animated Object')
+        self.inputs[-1].default_value = 'Animated Object'
+        self.inputs.new('ArmNodeSocketAnimAction', 'Idle')
+        self.inputs[-1].default_value = 'Idle'
+        self.inputs.new('NodeSocketFloat', 'Blend Time')
+        self.inputs[-1].default_value = 0.2
+
+
+    def draw_buttons(self, context, layout):
+        row1 = layout.row(align=True)
+        row2 = layout.row(align=True)
+
+        op = row1.operator('arm.node_add_input', text='New Animation Controller', icon='PLUS', emboss=True)
+        op.node_index = str(id(self))
+        op.socket_type = 'NodeSocketBool'
+        
+        op2 = row1.operator('arm.node_add_input', text='New Animation', icon='PLUS', emboss=True)
+        op2.node_index = str(id(self))
+        op2.socket_type = 'ArmNodeSocketAnimAction'
+        
+        op3 = row2.operator('arm.node_add_input', text='New blend time', icon='PLUS', emboss=True)
+        op3.node_index = str(id(self))
+        op3.socket_type = 'NodeSocketFloat'
+        
+        op4 = row2.operator('arm.node_remove_input', text='', icon='X', emboss=True)
+        op4.node_index = str(id(self))
+
 def register():
     # Add custom nodes
     # TODO: separate into single .py file per logic node, similar to the main Armory repository
@@ -165,6 +211,7 @@ def register():
     add_node(LookNode, category='Action')
     add_node(PlayerController, category='Action')
     add_node(CameraController, category='Action')
+    add_node(AnimationControllerNode, category='Animation')
 
     # Register newly added nodes
     arm.nodes_logic.register_nodes()

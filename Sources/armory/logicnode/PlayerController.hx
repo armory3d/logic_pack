@@ -6,6 +6,9 @@ import armory.trait.physics.RigidBody;
 
 class PlayerController extends LogicNode {
 
+	var isCrouching:Bool;
+	var lastKeyStateCrouch:Bool;
+
 	public function new(tree:LogicTree) {
 		super(tree);
 	}
@@ -36,24 +39,47 @@ class PlayerController extends LogicNode {
 		var runMult:Float = inputs[14].get();
 
 		var crouch:Bool = inputs[15].get();
-		var crouchMult:Float = inputs[16].get();
+		var crouchHold:Bool = inputs[16].get();
+		var crouchMult:Float = inputs[17].get();
 
 		if(player == null) return;
-
+		if(isCrouching == null) isCrouching = false;
+		if(lastKeyStateCrouch == null) lastKeyStateCrouch = false;
 		var loc = new Vec4(0, 0, 0);
 
+		// apply run Multiplier
 		if(run) {
 			fwSpeed *= runMult;
 			lftSpeed *= runMult;
 			rgtSpeed *= runMult;
 			revSpeed *= runMult;
 		}
-		if(crouch) {
+
+		// Crouching logic
+		if (crouchHold) {
+			if(crouch) {	// directly set crouching parameter
+				isCrouching = true;
+			} else {
+				isCrouching = false;
+			}
+		} else {
+			if(lastKeyStateCrouch != crouch) {
+				lastKeyStateCrouch = crouch;
+				if(crouch) {	// toggle on every keypress
+					isCrouching = !isCrouching;
+				}
+			}
+		}
+
+		// apply Crouch Multiplier
+		if(isCrouching) {
 			fwSpeed *= crouchMult;
 			lftSpeed *= crouchMult;
 			rgtSpeed *= crouchMult;
 			revSpeed *= crouchMult;
 		}
+
+		// determine general movement
 		if(fw) {
 			var v = player.transform.world.look();
 			v.x *= fwSpeed;
@@ -92,6 +118,7 @@ class PlayerController extends LogicNode {
 
 		var vec = new Vec4(loc.x * generalSpeed, loc.y * generalSpeed, loc.z * generalSpeed);
 
+		// apply Movement
 		player.transform.loc.add(vec);
 		player.transform.buildMatrix();
 
