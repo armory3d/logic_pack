@@ -26,10 +26,7 @@ class AnimationControllerNode extends LogicNode {
 				var active:Int = 3*index + 4;	// offset from default values
 				var currentAnimation:Int = active + 1;	//offset from bool
 				var currentBlendTime:Int = active + 2;	//offset from animation
-				trace(inputs[active].get());
 				if(inputs[active].get() && playAnimation) {
-					trace("play Action: "+inputs[currentAnimation].get());
-					trace("with blend time:"+inputs[currentBlendTime].get());
 					playAnimation = false;
 					animation.play(inputs[currentAnimation].get(), function () {
 						runOutputs(1);
