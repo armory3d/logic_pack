@@ -9,7 +9,6 @@ class AnimationControllerNode extends LogicNode {
 	}
 
 	override function run() {
-		trace("start");
 		var animated:Object = inputs[1].get();
 
 		var idle:String = inputs[2].get();
