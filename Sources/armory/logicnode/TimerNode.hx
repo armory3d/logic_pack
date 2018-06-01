@@ -67,7 +67,7 @@ class TimerNode extends LogicNode {
 		if(running && !(stop || pause)) {
 			currentDuration -= iron.system.Time.delta;
 			if(currentDuration <= 0) {
-				run();
+				super.run();
 				if(repetitions == 0) {
 					tree.removeUpdate(update);
 					running = false;
