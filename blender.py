@@ -143,8 +143,8 @@ class CameraController(Node, ArmLogicTreeNode):
         self.inputs.new('NodeSocketBool', 'Additional Modifier (e.g. sniper)')
         self.inputs.new('NodeSocketFloat', 'Modifier')
         self.inputs[-1].default_value = 0.25
-        self.inputs.new('NodeSocketBool', 'Invert Vertical')
         self.inputs.new('NodeSocketBool', 'Invert Horizontal')
+        self.inputs.new('NodeSocketBool', 'Invert Vertical')
 
         self.inputs.new('NodeSocketFloat', 'Horizontal Axis Movement')
         self.inputs.new('NodeSocketFloat', 'Horiontal Speed')
@@ -201,6 +201,28 @@ class AnimationControllerNode(Node, ArmLogicTreeNode):
         op4 = row2.operator('arm.node_remove_input', text='', icon='X', emboss=True)
         op4.node_index = str(id(self))
 
+class TimerNode(Node, ArmLogicTreeNode):
+    '''TimerNode'''
+    bl_idname = 'LNTimerNode'
+    bl_label = 'Timer Node'
+    bl_icon = 'GAME'
+
+    def init(self, context):
+        self.outputs.new('ArmNodeSocketAction', 'Out')
+        self.outputs.new('ArmNodeSocketAction', 'Done')
+        self.outputs.new('NodeSocketBool', 'Running')
+        self.outputs.new('NodeSocketBool', 'Paused')
+        self.outputs.new('NodeSocketFloat', 'Seconds left')
+        self.outputs.new('NodeSocketFloat', 'Progress (in %)')
+        self.outputs.new('NodeSocketInt', 'Repetitions done')
+
+        self.inputs.new('ArmNodeSocketAction', 'Start')
+        self.inputs.new('NodeSocketBool', 'Pause')
+        self.inputs.new('NodeSocketBool', 'Stop')
+
+        self.inputs.new('NodeSocketFloat', 'Seconds')
+        self.inputs.new('NodeSocketInt', 'Repetitions (0 for oneshot, negative for unlimited)')
+
 def register():
     # Add custom nodes
     # TODO: separate into single .py file per logic node, similar to the main Armory repository
@@ -212,6 +234,7 @@ def register():
     add_node(PlayerController, category='Action')
     add_node(CameraController, category='Action')
     add_node(AnimationControllerNode, category='Animation')
+    add_node(TimerNode, category='Logic')
 
     # Register newly added nodes
     arm.nodes_logic.register_nodes()
