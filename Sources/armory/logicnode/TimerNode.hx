@@ -37,16 +37,16 @@ class TimerNode extends LogicNode {
 	}
 	
 	override function get(from:Int):Dynamic {
-		if(from == 1) {
+		if(from == 2) {
 			return running;
 		} else {
-			if(from == 2) {
+			if(from == 3) {
 				return paused;
 			} else {
-				if(from == 3) {
+				if(from == 4) {
 					return currentDuration;
 				} else {
-					if(from == 4) {
+					if(from == 5) {
 						if(repetitions < 0) {
 							return 0;
 						} else {
@@ -69,6 +69,7 @@ class TimerNode extends LogicNode {
 			if(currentDuration <= 0) {
 				runOutputs(0);
 				if(repetitions == 0) {
+					runOutputs(1);
 					tree.removeUpdate(update);
 					running = false;
 					currentDuration = 0.0;

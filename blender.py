@@ -209,6 +209,7 @@ class TimerNode(Node, ArmLogicTreeNode):
 
     def init(self, context):
         self.outputs.new('ArmNodeSocketAction', 'Out')
+        self.outputs.new('ArmNodeSocketAction', 'Done')
         self.outputs.new('NodeSocketBool', 'Running')
         self.outputs.new('NodeSocketBool', 'Paused')
         self.outputs.new('NodeSocketFloat', 'Seconds left')
