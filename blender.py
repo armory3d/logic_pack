@@ -223,6 +223,19 @@ class TimerNode(Node, ArmLogicTreeNode):
         self.inputs.new('NodeSocketFloat', 'Seconds')
         self.inputs.new('NodeSocketInt', 'Repetitions (0 for oneshot, negative for unlimited)')
 
+class LerpVectorsNode(Node, ArmLogicTreeNode):
+    '''Lerp Vectors node'''
+    bl_idname = 'LNLerpVectorsNode'
+    bl_label = 'Lerp Vectors'
+    bl_icon = 'GAME'
+
+    def init(self, context):
+        self.inputs.new('ArmNodeSocketAction', 'In')
+        self.inputs.new('NodeSocketVector', 'Starting Vector')
+        self.inputs.new('NodeSocketVector', 'End Vector')
+        self.inputs.new('NodeSocketFloat', 'Time For Change')
+        self.outputs.new('NodeSocketVector', 'Vector')
+
 def register():
     # Add custom nodes
     # TODO: separate into single .py file per logic node, similar to the main Armory repository
@@ -235,6 +248,7 @@ def register():
     add_node(CameraController, category='Action')
     add_node(AnimationControllerNode, category='Animation')
     add_node(TimerNode, category='Logic')
+    add_node(LerpVectorsNode, category='Value')
 
     # Register newly added nodes
     arm.nodes_logic.register_nodes()
