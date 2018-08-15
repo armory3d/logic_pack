@@ -234,6 +234,7 @@ class LerpVectorsNode(Node, ArmLogicTreeNode):
         self.inputs.new('NodeSocketVector', 'Starting Vector')
         self.inputs.new('NodeSocketVector', 'End Vector')
         self.inputs.new('NodeSocketFloat', 'Time For Change')
+        self.inputs.new('NodeSocketBool', 'Stop Interpolation')
         self.outputs.new('NodeSocketVector', 'Vector')
 
 def register():
