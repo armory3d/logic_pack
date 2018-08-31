@@ -80,7 +80,7 @@ var e2:Vec4 = new Vec4();
 		var p1:Quat = player.transform.rot;
 		var p2:Quat = new Quat().fromEuler(-e1.y, -e1.z, -e1.x);
 
-		player.transform.rot = Quat.lerp(p1, p2, 0.5);
+		player.transform.rot = new Quat().lerp(p1, p2, 0.5);
 		player.transform.buildMatrix();
 
 		if(vertRestr) {
@@ -93,7 +93,7 @@ var e2:Vec4 = new Vec4();
 		var c1:Quat = camera.transform.rot;
 		var c2:Quat = new Quat().fromEuler(-e2.y, -e2.z, -e2.x);
 
-		camera.transform.rot = Quat.lerp(c1, c2, 0.5);
+		camera.transform.rot = new Quat().lerp(c1, c2, 0.5);
 		camera.transform.buildMatrix();
 
 		#if arm_physics
