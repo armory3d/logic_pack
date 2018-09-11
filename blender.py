@@ -24,7 +24,7 @@ class SeparateQuatNode(Node, ArmLogicTreeNode):
     bl_icon = 'GAME'
 
     def init(self, context):
-        self.inputs.new('NodeSocketShader', 'Transform')
+        self.inputs.new('NodeSocketVector', 'Quat')
         self.outputs.new('NodeSocketFloat', 'X')
         self.outputs.new('NodeSocketFloat', 'Y')
         self.outputs.new('NodeSocketFloat', 'Z')
