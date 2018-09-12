@@ -63,7 +63,7 @@ class LookingAtNode extends LogicNode {
 		var dist:Vec4 = subvecs(objFrom.transform.world.getLoc(), objTo.transform.world.getLoc());
 		var projDistance:Vec4 = normalize(subvecs(dist, multvec(mainAxis, dotvecs(mainAxis, dist))));
 		
-		trace(projDistance);
+		// trace(projDistance);
 		// 2nd
 		var projFace:Vec4 = normalize(subvecs(face, multvec(mainAxis, dotvecs(mainAxis, face))));
 		
@@ -93,9 +93,7 @@ class LookingAtNode extends LogicNode {
 		
 		var secondaryAngle:Float = -Math.acos(distNorm.dot(mainNorm)) -Math.PI/2;
 		
-		//secondaryAngle = (iron.system.Time.time() % Math.PI) - Math.PI/2;
-		//secondaryAngle = -Math.PI/2;
-		trace(secondaryAngle);
+		// trace(secondaryAngle);
 		// 2nd
 		objFrom.transform.rotate(normalize(crossvecs(distNorm,mainNorm)), secondaryAngle);
 		
