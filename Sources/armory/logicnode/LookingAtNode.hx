@@ -3,6 +3,8 @@ package armory.logicnode;
 import iron.math.Vec4;
 import iron.math.Quat;
 import iron.object.Object;
+import armory.trait.physics.RigidBody;
+
  
 class LookingAtNode extends LogicNode {
 	
@@ -98,5 +100,10 @@ class LookingAtNode extends LogicNode {
 		objFrom.transform.rotate(normalize(crossvecs(distNorm,mainNorm)), secondaryAngle);
 		
 		objFrom.transform.buildMatrix();
+		
+		#if arm_physics
+		var rigidBody = objFrom.getTrait(RigidBody);
+		if (rigidBody != null) rigidBody.syncTransform();
+		#end
 	}
 }
