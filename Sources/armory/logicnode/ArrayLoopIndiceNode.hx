@@ -11,6 +11,7 @@ class ArrayLoopIndiceNode extends LogicNode {
 
 	override function run() {
 		var ar:Array<Dynamic> = inputs[1].get();
+		if(ar == null) return;
 		index = 0;
 		for (val in ar) {
 			value = val;

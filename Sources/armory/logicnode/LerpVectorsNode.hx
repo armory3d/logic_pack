@@ -26,7 +26,7 @@ class LerpVectorsNode extends LogicNode {
 
 	override function get(from:Int):Dynamic {
 		abo = inputs[4].get();
-		trace(t);	
+		// trace(t);	
 		if (abo) {
 			t = 0;
 		}
