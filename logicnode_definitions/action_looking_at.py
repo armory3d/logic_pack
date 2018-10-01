@@ -10,9 +10,8 @@ class LookingAtNode(Node, ArmLogicTreeNode):
 	bl_icon = 'GAME'
 	
 	def init(self, context):
-		self.inputs.new('ArmNodeSocketAction', 'Activate')
-		self.inputs.new('ArmNodeSocketObject', 'From Object')
-		self.inputs.new('ArmNodeSocketObject', 'To Object')
+		self.inputs.new('NodeSocketVector', 'From Position')
+		self.inputs.new('NodeSocketVector', 'To Position')
 		self.inputs.new('NodeSocketVector', 'Front Facing')
 		self.inputs.new('NodeSocketVector', 'Main Rotation Axis')
 		self.inputs.new('NodeSocketBool', 'Disable Primary Roatation')
@@ -23,5 +22,8 @@ class LookingAtNode(Node, ArmLogicTreeNode):
 		self.inputs.new('NodeSocketBool', 'Restrict Secondary Rotation')
 		self.inputs.new('NodeSocketFloat', 'min Secondary Rotation')
 		self.inputs.new('NodeSocketFloat', 'max Secondary Rotation')
+		self.outputs.new('NodeSocketVector', 'Rotation (Euler)')
+		self.outputs.new('NodeSocketVector', 'Rotation (Quat)')
+		self.outputs.new('NodeSocketBool', 'Is in field of view')
 
 add_node(LookingAtNode, category='Action')

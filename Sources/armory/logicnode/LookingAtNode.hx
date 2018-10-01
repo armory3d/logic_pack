@@ -1,48 +1,26 @@
 package armory.logicnode;
 
 import iron.math.Vec4;
-import iron.math.Quat;
 import iron.object.Object;
-import armory.trait.physics.RigidBody;
+import iron.object.Transform;
 
-/*
-abstract Vect4(Vec4) {
-	public inline function new(v:Vec4) {
-		this = v;
-	}
-
-	@:op(A + B)
-	public inline function add(v:Vec4):Vec4 {
-		return new Vec4(
-			this.x + v.x,
-			this.y + v.y,
-			this.z + v.z,
-			1);
-	}
-
-	@:op(A - B)
-	public inline function sub(v:Vec4):Vec4 {
-		return new Vec4(
-			this.x - v.x,
-			this.y - v.y,
-			this.z - v.z,
-			1);
-	}
-
-	// dot product
-	@:op(A * B)
-	public inline function dot(v:Vec4):Float {
-		return this.x * v.x + this.y * v.y + this.z * v.z;
-	}
-
-}
-*/
 class LookingAtNode extends LogicNode {
 	
+	var transform:Transform = new Transform(new Object());
+
+	var valid:Bool = false;
+
+	var inView:Bool = true;
+
 	public function new(tree:LogicTree) {
 		super(tree);
+		tree.notifyOnUpdate(update);
 	}
 	
+	public function update() {
+		valid = false;
+	}
+
 	private inline function subvecs(a:Vec4, b:Vec4):Vec4 {
 		return new Vec4(a.x-b.x, a.y-b.y, a.z-b.z, 1);
 	}
@@ -69,36 +47,36 @@ class LookingAtNode extends LogicNode {
 	private inline function project(v:Vec4, plane:Vec4) {
 		return subvecs(v, multvec(plane, dotvecs(plane, v)));
 	}
-	
-	override function run() {
+
+	public function compute() {
 
 		// read inputs
-		var objFrom:Object = inputs[1].get();
-		var objTo:Object = inputs[2].get();
+		var fromVec:Vec4 = inputs[0].get();
+		var toVec:Vec4 = inputs[1].get();
 		
 		// face and main axis MUST be different
-		var face:Vec4 = inputs[3].get().normalize();
-		var mainAxis:Vec4 = inputs[4].get().normalize();
+		var face:Vec4 = inputs[2].get().normalize();
+		var mainAxis:Vec4 = inputs[3].get().normalize();
 		
 		// disable rotations
-		var disableMain:Bool = inputs[5].get();
-		var disableSecondary:Bool = inputs[6].get();
+		var disableMain:Bool = inputs[4].get();
+		var disableSecondary:Bool = inputs[5].get();
 
 		// restrict rotations
-		var restrictMain:Bool = inputs[7].get();
+		var restrictMain:Bool = inputs[6].get();
 		
-		var restrictMainMin:Float = inputs[8].get();
-		var restrictMainMax:Float = inputs[9].get();
+		var restrictMainMin:Float = inputs[7].get();
+		var restrictMainMax:Float = inputs[8].get();
 
-		var restrictSecondary:Bool = inputs[10].get();
+		var restrictSecondary:Bool = inputs[9].get();
 
-		var restrictSecondaryMin:Float = inputs[11].get();
-		var restrictSecondaryMax:Float = inputs[12].get();
+		var restrictSecondaryMin:Float = inputs[10].get();
+		var restrictSecondaryMax:Float = inputs[11].get();
 
 		var mainAngle:Float = 0;
-		var dist:Vec4 = subvecs(objTo.transform.world.getLoc(), objFrom.transform.world.getLoc());
-		
-		var inView:Bool = true;
+		var dist:Vec4 = subvecs(toVec, fromVec);
+
+		inView = true;
 
 		if(!disableMain) {
 			// rotate around main axis
@@ -133,20 +111,20 @@ class LookingAtNode extends LogicNode {
 
 			if(restrictMain) {
 				if(mainAngle > restrictMainMax) {
-					mainAngle = restrictMainMax;
 					inView = false;
+					mainAngle = restrictMainMax;
 				}
 				if(mainAngle < restrictMainMin) {
-					mainAngle = restrictMainMin;
 					inView = false;
+					mainAngle = restrictMainMin;
 				}
 			}
-			trace(mainAngle);
+			// trace(mainAngle);
 		}
 		
 		// 4th
-		objFrom.transform.setRotation(0, 0, 0);
-		objFrom.transform.rotate(mainAxis, mainAngle);
+		transform.setRotation(0, 0, 0);
+		transform.rotate(mainAxis, mainAngle);
 		
 		if(!disableSecondary) {
 			// also rotate our face direction
@@ -168,25 +146,32 @@ class LookingAtNode extends LogicNode {
 		
 			if(restrictSecondary) {
 				if(secondaryAngle > restrictSecondaryMax) {
-					secondaryAngle = restrictSecondaryMax;
 					inView = false;
+					secondaryAngle = restrictSecondaryMax;
 				}
 				if(secondaryAngle < restrictSecondaryMin) {
-					secondaryAngle = restrictSecondaryMin;
 					inView = false;
+					secondaryAngle = restrictSecondaryMin;
 				}
 			}
 
-			trace(secondaryAngle);
+			// trace(secondaryAngle);
 			// 2nd
-			objFrom.transform.rotate(normalize(crossvecs(projDistance,mainAxis)), secondaryAngle);
+			transform.rotate(crossvecs(projDistance,mainAxis).normalize(), secondaryAngle);
 		}
 
-		objFrom.transform.buildMatrix();
-		
-		#if arm_physics
-		var rigidBody = objFrom.getTrait(RigidBody);
-		if (rigidBody != null) rigidBody.syncTransform();
-		#end
+		valid = true;
+	}
+
+	override function get(index:Int):Dynamic {
+		if(!valid)
+			compute();
+
+		if(index == 0)
+			return transform.rot.getEuler();
+		else if(index == 1)
+			return transform.rot;
+		else
+			return inView;
 	}
 }
