@@ -13,7 +13,7 @@ class PlayerController extends LogicNode {
 		super(tree);
 	}
 
-	override function run() {
+	override function run(from:Int) {
 
 		// player inputs
 
@@ -128,6 +128,6 @@ class PlayerController extends LogicNode {
 		#end
 
 		if(fw || lft || rgt || rev || jmp)
-			super.run();
+			runOutput(0);
 	}
 }

@@ -19,7 +19,7 @@ class TimerNode extends LogicNode {
 		super(tree);
 	}
 	
-	override function run() {
+	override function run(from:Int) {
 		pause = inputs[1].get();
 		stop = inputs[2].get();
 		if(!running && !(stop || pause || paused)) {
@@ -67,9 +67,9 @@ class TimerNode extends LogicNode {
 		if(running && !(stop || pause)) {
 			currentDuration -= iron.system.Time.delta;
 			if(currentDuration <= 0) {
-				runOutputs(0);
+				runOutput(0);
 				if(repetitions == 0) {
-					runOutputs(1);
+					runOutput(1);
 					tree.removeUpdate(update);
 					running = false;
 					currentDuration = 0.0;

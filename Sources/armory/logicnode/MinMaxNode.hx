@@ -10,7 +10,7 @@ class MinMaxNode extends LogicNode {
 		super(tree);
 	}
 
-	override function run() {
+	override function run(from:Int) {
 		// Logic for this node
 		var realvariable = inputs[1];
 		var variable:Dynamic = inputs[1].get();
@@ -26,6 +26,6 @@ class MinMaxNode extends LogicNode {
 		if (condmax)
 			realvariable.set(maximum);
 
-		super.run();
+		runOutput(0);
 	}
 }

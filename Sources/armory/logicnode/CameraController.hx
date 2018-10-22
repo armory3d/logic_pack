@@ -15,7 +15,7 @@ var e2:Vec4 = new Vec4();
 		super(tree);
 	}
 
-	override function run() {
+	override function run(from:Int) {
 
 		// player inputs
 
@@ -104,6 +104,6 @@ var e2:Vec4 = new Vec4();
 		#end
 
 		if(horzMove != 0 || vertMove != 0)
-			super.run();
+			runOutput(0);
 	}
 }

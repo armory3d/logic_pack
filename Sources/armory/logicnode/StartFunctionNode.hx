@@ -33,7 +33,7 @@ class StartFunctionNode extends LogicNode {
 		name1 = _property0;
 		id = iron.Scene.global.properties.get(name1+"run");
 		if (iron.Scene.global.properties == null) iron.Scene.global.properties = new Map();
-		if (iron.Scene.global.properties.get(name1+"run")!=0) runOutputs(0);
+		if (iron.Scene.global.properties.get(name1+"run")!=0) runOutput(0);
 	}
 
 	override function get(from:Int):Dynamic {	

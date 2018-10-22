@@ -16,7 +16,7 @@ class LerpVectorsNode extends LogicNode {
 		super(tree);
 	}
 
-	override function run() {
+	override function run(from:Int) {
 		v1 = inputs[1].get();
 		v2 = inputs[2].get();
 		t = inputs[3].get();
