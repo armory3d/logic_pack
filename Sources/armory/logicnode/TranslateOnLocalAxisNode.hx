@@ -14,7 +14,7 @@ var vec = new Vec4();
 		super(tree);
 	}
 
-	override function run() {
+	override function run(from:Int) {
 		var object:Object = inputs[1].get();
 		var sp:Float = inputs[2].get();
 		var l:Int = inputs[3].get();
@@ -50,6 +50,6 @@ var vec = new Vec4();
 		if (rigidBody != null) rigidBody.syncTransform();
 		#end
 
-		super.run();
+		runOutput(0);
 	}
 }

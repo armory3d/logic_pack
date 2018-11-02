@@ -14,7 +14,7 @@ var f:Bool = true;
 		super(tree);
 	}
 
-	override function run() {
+	override function run(from:Int) {
 		var LookX:Bool = inputs[3].get();
 		var LookY:Bool = inputs[4].get();
 		var Min:Float = inputs[5].get();
@@ -56,7 +56,7 @@ var f:Bool = true;
 		if (rigidBody != null) rigidBody.syncTransform();
 		#end
 
-		super.run();
+		runOutput(0);
 		
 	}			
 }

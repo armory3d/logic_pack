@@ -48,7 +48,7 @@ class ReturnFunctionNode extends LogicNode {
 	function recieve(){
 			if (iron.Scene.global.properties.get(name1+"end")==id){		
 				t = true;
-				runOutputs(0);
+				runOutput(0);
 			}
 		}
 }

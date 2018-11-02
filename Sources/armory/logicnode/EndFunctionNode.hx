@@ -21,7 +21,7 @@ class EndFunctionNode extends LogicNode {
 		if (iron.Scene.global.properties.get(name2+"Rend")==id)iron.Scene.global.properties.set(name2+"Rend",0);
 	}
 
-	override function run() {	
+	override function run(from:Int) {	
 		id = iron.Scene.global.properties.get(name2+"run");
 		if (iron.Scene.global.properties == null) iron.Scene.global.properties = new Map();
 		for(i in 2...inputs.length) {
@@ -31,6 +31,6 @@ class EndFunctionNode extends LogicNode {
 
 		entries = Event.get(name2+"R");
 		for (e in entries) e.onEvent();
-		runOutputs(0);
+		runOutput(0);
 	}
 }

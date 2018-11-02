@@ -8,7 +8,7 @@ class AnimationControllerNode extends LogicNode {
 		super(tree);
 	}
 
-	override function run() {
+	override function run(from:Int) {
 		var animated:Object = inputs[1].get();
 
 		var idle:String = inputs[2].get();
@@ -28,7 +28,7 @@ class AnimationControllerNode extends LogicNode {
 				if(inputs[active].get() && playAnimation) {
 					playAnimation = false;
 					animation.play(inputs[currentAnimation].get(), function () {
-						runOutputs(1);
+						runOutput(1);
 					}, inputs[currentBlendTime].get());
 				}
 			}
@@ -36,10 +36,10 @@ class AnimationControllerNode extends LogicNode {
 
 		if(playAnimation) {
 			animation.play(idle, function () {
-				runOutputs(1);
+				runOutput(1);
 			}, blendTime);
 		}
 
-		runOutputs(0);
+		runOutput(0);
 	}
 }

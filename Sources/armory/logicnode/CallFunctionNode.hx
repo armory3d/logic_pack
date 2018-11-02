@@ -21,7 +21,7 @@ class CallFunctionNode extends LogicNode {
 		if (iron.Scene.global.properties.get(n+"run")==id)iron.Scene.global.properties.set(n+"run",0);
 	}
 
-	override function run() {	
+	override function run(from:Int) {	
 		n = inputs[1].get();
 		id = inputs[2].get();
 		iron.Scene.global.properties.set(n+"run",id);
@@ -32,6 +32,6 @@ class CallFunctionNode extends LogicNode {
 		
 		entries = Event.get(n);
 		for (e in entries) e.onEvent();
-		runOutputs(0);
+		runOutput(0);
 	}
 }
