@@ -6,8 +6,8 @@ import armory.trait.physics.RigidBody;
 
 class PlayerController extends LogicNode {
 
-	var isCrouching:Bool;
-	var lastKeyStateCrouch:Bool;
+	var isCrouching:Bool = false;
+	var lastKeyStateCrouch:Bool = false;
 
 	public function new(tree:LogicTree) {
 		super(tree);
@@ -43,8 +43,6 @@ class PlayerController extends LogicNode {
 		var crouchMult:Float = inputs[17].get();
 
 		if(player == null) return;
-		if(isCrouching == null) isCrouching = false;
-		if(lastKeyStateCrouch == null) lastKeyStateCrouch = false;
 		var loc = new Vec4(0, 0, 0);
 
 		// apply run Multiplier
