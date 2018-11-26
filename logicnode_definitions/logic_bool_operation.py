@@ -14,10 +14,6 @@ class BoolOperationNode(Node, ArmLogicTreeNode):
 				 ('OR', 'Or', 'True, if either of the inputs is true.'),
 				 ('XOR', 'Xor', 'True, when an uneven number of inputs is true.'),
 				 ('EQUAL', 'Equal', 'True, when both inputs are the same.'),
-				# ('Less', 'Less', 'Less'),
-				# ('More', 'More', 'More'),
-				# ('Less Equal', 'Less Equal', 'Less Equal'),
-				# ('More Equal', 'More Equal', 'More Equal'),
 				 ],
 		name='', default='AND')
 
