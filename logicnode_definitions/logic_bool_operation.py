@@ -15,7 +15,7 @@ class BoolOperationNode(Node, ArmLogicTreeNode):
 				 ('XOR', 'Xor', 'True, when an uneven number of inputs is true.'),
 				 ('EQUAL', 'Equal', 'True, when both inputs are the same.'),
 				 ],
-		name='', default='AND')
+		name='Select Operation', default='AND')
 
 	def __init__(self):
 		array_nodes[str(id(self))] = self

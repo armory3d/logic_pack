@@ -17,7 +17,7 @@ class CompareNumberNode(Node, ArmLogicTreeNode):
 				 ('LESS EQUAL', 'Less Equal', 'True, if A is less than or equal to B.'),
 				 ('MORE EQUAL', 'More Equal', 'True, if A is more than or equal to B.'),
 				 ],
-		name='', default='EQUAL')
+		name='Select Operation', default='EQUAL')
 
 	property1 = FloatProperty(name='Tolerance', description='Almost Equal threshold', default=0.0001)
 
