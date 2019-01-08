@@ -7,7 +7,7 @@ class LookNode(Node, ArmLogicTreeNode):
     '''Look Node'''
     bl_idname = 'LNLookNode'
     bl_label = 'Look'
-    bl_icon = 'GAME'
+    bl_icon = 'QUESTION'
 
     def init(self, context):
         self.inputs.new('ArmNodeSocketAction', 'In')

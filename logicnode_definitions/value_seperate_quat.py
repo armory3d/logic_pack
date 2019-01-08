@@ -7,7 +7,7 @@ class SeparateQuatNode(Node, ArmLogicTreeNode):
     '''SeparateQuatNode'''
     bl_idname = 'LNSeparateQuatNode'
     bl_label = 'Separate Quat'
-    bl_icon = 'GAME'
+    bl_icon = 'QUESTION'
 
     def init(self, context):
         self.inputs.new('NodeSocketVector', 'Quat')

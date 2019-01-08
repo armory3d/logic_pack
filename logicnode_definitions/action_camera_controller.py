@@ -8,7 +8,7 @@ class CameraController(Node, ArmLogicTreeNode):
     '''CameraController'''
     bl_idname = 'LNCameraController'
     bl_label = 'Camera Controller'
-    bl_icon = 'GAME'
+    bl_icon = 'QUESTION'
 
     def init(self, context):
         self.outputs.new('ArmNodeSocketAction', 'Out')

@@ -8,7 +8,7 @@ class StartFunctionNode(Node, ArmLogicTreeNode):
     bl_idname = 'LNStartFunctionNode'
     bl_label = 'Start Function'
     bl_icon = 'CURVE_PATH'
-    property0 = StringProperty(name='', default='')
+    property0: StringProperty(name='', default='')
     min_outputs = 1
 
     def __init__(self):

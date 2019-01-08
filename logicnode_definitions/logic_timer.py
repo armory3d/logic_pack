@@ -7,7 +7,7 @@ class TimerNode(Node, ArmLogicTreeNode):
     '''TimerNode'''
     bl_idname = 'LNTimerNode'
     bl_label = 'Timer Node'
-    bl_icon = 'GAME'
+    bl_icon = 'QUESTION'
 
     def init(self, context):
         self.outputs.new('ArmNodeSocketAction', 'Out')

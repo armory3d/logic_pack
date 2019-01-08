@@ -7,7 +7,7 @@ class EndFunctionNode(Node, ArmLogicTreeNode):
     '''End Function Node'''
     bl_idname = 'LNEndFunctionNode'
     bl_label = 'End Function'
-    bl_icon = 'GAME'
+    bl_icon = 'QUESTION'
     min_inputs = 2
 
     def __init__(self):

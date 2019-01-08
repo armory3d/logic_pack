@@ -7,7 +7,7 @@ from arm.logicnode.arm_nodes import *
 #    '''<Short Desciption (optional)>'''
 #    bl_idname = 'LN<NodeName>'
 #    bl_label = '<Name of the Node inside Blender>'
-#    bl_icon = 'GAME'
+#    bl_icon = 'QUESTION'
 
 #    def init(self, context):
 #        self.inputs.new('<SocketType>', '<SocketName>')

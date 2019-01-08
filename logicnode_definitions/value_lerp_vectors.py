@@ -7,7 +7,7 @@ class LerpVectorsNode(Node, ArmLogicTreeNode):
     '''Lerp Vectors node'''
     bl_idname = 'LNLerpVectorsNode'
     bl_label = 'Lerp Vectors'
-    bl_icon = 'GAME'
+    bl_icon = 'QUESTION'
 
     def init(self, context):
         self.inputs.new('ArmNodeSocketAction', 'In')

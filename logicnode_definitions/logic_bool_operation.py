@@ -7,9 +7,9 @@ class BoolOperationNode(Node, ArmLogicTreeNode):
 	'''Boolean Operations'''
 	bl_idname = 'LNBoolOperationNode'
 	bl_label = 'Boolean Operation'
-	bl_icon = 'GAME'
+	bl_icon = 'QUESTION'
 
-	property0 = EnumProperty(
+	property0: EnumProperty(
 		items = [('AND', 'And', 'True, if both inputs are true.'),
 				 ('OR', 'Or', 'True, if either of the inputs is true.'),
 				 ('XOR', 'Xor', 'True, when an uneven number of inputs is true.'),

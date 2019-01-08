@@ -8,7 +8,7 @@ class ReturnFunctionNode(Node, ArmLogicTreeNode):
     bl_idname = 'LNReturnFunctionNode'
     bl_label = 'Return Function'
     bl_icon = 'CURVE_PATH'
-    property0 = StringProperty(name='', default='')
+    property0: StringProperty(name='', default='')
     min_outputs = 1
 
     def __init__(self):

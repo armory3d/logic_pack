@@ -7,9 +7,9 @@ class CompareNumberNode(Node, ArmLogicTreeNode):
 	'''Compares two numbers'''
 	bl_idname = 'LNCompareNumberNode'
 	bl_label = 'Compare Numbers'
-	bl_icon = 'GAME'
+	bl_icon = 'QUESTION'
 	
-	property0 = EnumProperty(
+	property0: EnumProperty(
 		items = [('EQUAL', 'Equal', 'True, if both inputs are equal.'),
 				 ('ALMOST EQUAL', 'Almost Equal', 'True, if both inputs are almost (defined by threshold) equal.'),
 				 ('LESS', 'Less', 'True, if A is less than B.'),
@@ -19,7 +19,7 @@ class CompareNumberNode(Node, ArmLogicTreeNode):
 				 ],
 		name='Select Operation', default='EQUAL')
 
-	property1 = FloatProperty(name='Tolerance', description='Almost Equal threshold', default=0.0001)
+	property1: FloatProperty(name='Tolerance', description='Almost Equal threshold', default=0.0001)
 
 	def init(self, context):
 		self.inputs.new('NodeSocketInt', 'A')

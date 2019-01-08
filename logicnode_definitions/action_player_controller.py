@@ -7,7 +7,7 @@ class PlayerController(Node, ArmLogicTreeNode):
     '''PlayerController'''
     bl_idname = 'LNPlayerController'
     bl_label = 'Player Controller'
-    bl_icon = 'GAME'
+    bl_icon = 'QUESTION'
 
     def init(self, context):
         self.outputs.new('ArmNodeSocketAction', 'Out')

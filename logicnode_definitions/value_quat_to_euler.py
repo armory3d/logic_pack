@@ -7,7 +7,7 @@ class QuatToEulerNode(Node, ArmLogicTreeNode):
     '''QuatToEulerNode'''
     bl_idname = 'LNQuatToEulerNode'
     bl_label = 'Quat To Euler'
-    bl_icon = 'GAME'
+    bl_icon = 'QUESTION'
 
     def init(self, context):
         self.inputs.new('NodeSocketFloat', 'X')

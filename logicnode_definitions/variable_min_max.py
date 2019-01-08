@@ -7,7 +7,7 @@ class MinMaxNode(Node, ArmLogicTreeNode):
     '''Min/Max Node'''
     bl_idname = 'LNMinMaxNode'
     bl_label = 'MinMax'
-    bl_icon = 'GAME'
+    bl_icon = 'QUESTION'
 
     def init(self, context):
         self.inputs.new('ArmNodeSocketAction', 'In')
