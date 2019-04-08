@@ -30,7 +30,7 @@ class CameraController(Node, ArmLogicTreeNode):
         self.inputs.new('NodeSocketBool', 'Invert Vertical')
 
         self.inputs.new('NodeSocketFloat', 'Horizontal Axis Movement')
-        self.inputs.new('NodeSocketFloat', 'Horiontal Speed')
+        self.inputs.new('NodeSocketFloat', 'Horizontal Speed')
         self.inputs[-1].default_value = 1.0
         self.inputs.new('NodeSocketBool', 'Restrict Horizontal')
         self.inputs.new('NodeSocketFloat', 'hMin (Radians)')
