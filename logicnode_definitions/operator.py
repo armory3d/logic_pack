@@ -67,7 +67,7 @@ class SaveSelectedNodesOperator(bpy.types.Operator):
         node_file.write("class {0}(Node, ArmLogicTreeNode):\n".format(node_name+"_"+str(index)))
         node_file.write("\t'''{0}'''\n".format(node_name+"_"+str(index)))
         node_file.write("\tbl_idname=\"LN{0}\"\n".format(node_name+"_"+str(index)))
-        node_file.write("\tbl_label=\"{0}\"\n".format(node_name+"_"+str(index)))
+        node_file.write("\tbl_label=\"{0}\"\n".format(node_name))
         node_file.write("\tbl_icon=\"QUESTION\"\n")
         
         node_file.write("\tdef init(self, context):\n")
