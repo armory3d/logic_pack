@@ -9,6 +9,8 @@ class SaveSelectedNodesOperator(bpy.types.Operator):
 
     name: bpy.props.StringProperty(name = "Node Name: ", description = "The Name of the exported Nodes", default = "exported_node")
     library: bpy.props.StringProperty(name = "Library Name: ", description = "The Name of the Library into which the noder are being exported", default = "exported_nodes")
+    category: bpy.props.StringProperty(name = "Node Category: ", description = "The Category of the exported Nodes", default = "exported_nodes")
+    
     
     def invoke(self, context, event):
         return context.window_manager.invoke_props_dialog(self)
@@ -21,7 +23,7 @@ class SaveSelectedNodesOperator(bpy.types.Operator):
             for c in invalidCharacters:
                 valid = valid.replace(c, "_")
             return valid
-        
+
         library_name = self.library
         node_name = self.name
         fp = arm.utils.get_fp()
@@ -201,7 +203,7 @@ class SaveSelectedNodesOperator(bpy.types.Operator):
         # remove meta node
         node_file.write("\t\tnode_tree_nodes.remove(self)\n")
         # add node to armory
-        node_file.write("add_node({0}, category='{1}')".format(node_name+"_"+str(index), "Test"))
+        node_file.write("add_node({0}, category='{1}')".format(node_name+"_"+str(index), self.category))
 
         return {'FINISHED'}
     
