@@ -7,14 +7,21 @@ class SaveSelectedNodesOperator(bpy.types.Operator):
     bl_idname = "node.save_selected_nodes"
     bl_label = "Save Nodes To Library"
 
-    name = bpy.props.StringProperty(name = "Node Name: ", description = "The Name of the exported Nodes", default = "exported_node")
-    library = bpy.props.StringProperty(name = "Library Name: ", description = "The Name of the Library into which the noder are being exported", default = "exported_nodes")
+    name: bpy.props.StringProperty(name = "Node Name: ", description = "The Name of the exported Nodes", default = "exported_node")
+    library: bpy.props.StringProperty(name = "Library Name: ", description = "The Name of the Library into which the noder are being exported", default = "exported_nodes")
     
     def invoke(self, context, event):
         return context.window_manager.invoke_props_dialog(self)
     
     def execute(self, context):
 
+        invalidCharacters = [" ", ".", "/", "\\", ":", ";"]
+        def replaceInvalidCharacters(name):
+            valid = name
+            for c in invalidCharacters:
+                valid = valid.replace(c, "_")
+            return valid
+        
         library_name = self.library
         node_name = self.name
         fp = arm.utils.get_fp()
@@ -105,35 +112,35 @@ class SaveSelectedNodesOperator(bpy.types.Operator):
         averageY = 0
         # add all nodes, also "compute" the average location
         for node in nodes:
-            node_file.write("\t\tnode_{0} = node_tree_nodes.new(\"{1}\")\n".format(node.name.replace(".", "_").replace(" ", "_"), node.bl_idname))
+            node_file.write("\t\tnode_{0} = node_tree_nodes.new(\"{1}\")\n".format(replaceInvalidCharacters(node.name), node.bl_idname))
             averageX += node.location[0]/len(nodes)
             averageY += node.location[1]/len(nodes)
         
         # position nodes, based on their distance to the average location
         node_file.write("\t\t# create node layout\n")
         for node in nodes:
-            print(node.bl_idname)
+            # print(node.bl_idname)
             if node.bl_idname != "NodeFrame":
                 off_x = 0
                 off_y = 0
                 parent = node.parent
                 while parent is not None:
-                    print("add "+parent.bl_idname+" offset")
+                    # print("add "+parent.bl_idname+" offset")
                     off_x += parent.location[0]
                     off_y += parent.location[1]
                     parent = parent.parent
-                node_file.write("\t\tplaceNodeWithOffset(node_{0}, loc, [{1}, {2}])\n".format(node.name.replace(".", "_").replace(" ", "_"), node.location[0] + off_x - averageX, node.location[1] + off_y - averageY))
+                node_file.write("\t\tplaceNodeWithOffset(node_{0}, loc, [{1}, {2}])\n".format(replaceInvalidCharacters(node.name), node.location[0] + off_x - averageX, node.location[1] + off_y - averageY))
                 
         # handle frames
         node_file.write("\t\t# handle parenting, this is needed for frames\n")
         for node in nodes:
             if node.parent is not None:
-                node_file.write("\t\tnode_{0}.parent = node_{1}\n".format(node.name.replace(".", "_").replace(" ", "_"), node.parent.name.replace(".", "_").replace(" ", "_")))
+                node_file.write("\t\tnode_{0}.parent = node_{1}\n".format(replaceInvalidCharacters(node.name), replaceInvalidCharacters(node.parent.name)))
 
         # handle labels
         node_file.write("\t\t# create labels\n")
         for node in nodes:
-            node_file.write("\t\tnode_{0}.label = \"{1}\"\n".format(node.name.replace(".", "_").replace(" ", "_"), node.label))
+            node_file.write("\t\tnode_{0}.label = \"{1}\"\n".format(replaceInvalidCharacters(node.name), node.label))
 
         # handle values
         node_file.write("\t\t# set default input values\n")
@@ -147,15 +154,15 @@ class SaveSelectedNodesOperator(bpy.types.Operator):
                         for x in range(0, len(inp.default_value)):
                             # so string arrays even exist in blender nodes?
                             if type(inp.default_value[x]) is str:
-                                node_file.write("\t\tnode_{0}.inputs.[{1}].default_value[{2}] = \"{3}\"\n".format(node.name.replace(".", "_").replace(" ", "_"), i, x, inp.default_value[x]))
+                                node_file.write("\t\tnode_{0}.inputs.[{1}].default_value[{2}] = \"{3}\"\n".format(replaceInvalidCharacters(node.name), i, x, inp.default_value[x]))
                             else:
-                                node_file.write("\t\tnode_{0}.inputs[{1}].default_value[{2}] = {3}\n".format(node.name.replace(".", "_").replace(" ", "_"), i, x, inp.default_value[x]))
+                                node_file.write("\t\tnode_{0}.inputs[{1}].default_value[{2}] = {3}\n".format(replaceInvalidCharacters(node.name), i, x, inp.default_value[x]))
                     else:
                         if type(inp.default_value) is str:
-                            node_file.write("\t\tnode_{0}.inputs[{1}].default_value = \"{2}\"\n".format(node.name.replace(".", "_").replace(" ", "_"), i, inp.default_value))
+                            node_file.write("\t\tnode_{0}.inputs[{1}].default_value = \"{2}\"\n".format(replaceInvalidCharacters(node.name), i, inp.default_value))
                         else:
-                            node_file.write("\t\tnode_{0}.inputs[{1}].default_value = {2}\n".format(node.name.replace(".", "_").replace(" ", "_"), i, inp.default_value))
-                            # node_file.write("\t\tnode_{0}.label = \"{1}\"\n".format(node.name.replace(".", "_").replace(" ", "_"), node.label))
+                            node_file.write("\t\tnode_{0}.inputs[{1}].default_value = {2}\n".format(replaceInvalidCharacters(node.name), i, inp.default_value))
+                            # node_file.write("\t\tnode_{0}.label = \"{1}\"\n".format(replaceInvalidCharacters(node.name), node.label))
 
         # handle properties
         node_file.write("\t\t# set node properties like add/subtract on math node\n")
@@ -173,9 +180,9 @@ class SaveSelectedNodesOperator(bpy.types.Operator):
                     # print(attrib)
                     node_file.write("\t\ttry:\n")
                     if type(getattr(node, attrib)).__name__ == "str":
-                        node_file.write("\t\t\tnode_{0}.{1} = \"{2}\"\n".format(node.name.replace(".", "_").replace(" ", "_"), attrib, getattr(node, attrib)))
+                        node_file.write("\t\t\tnode_{0}.{1} = \"{2}\"\n".format(replaceInvalidCharacters(node.name), attrib, getattr(node, attrib)))
                     else:
-                        node_file.write("\t\t\tnode_{0}.{1} = {2}\n".format(node.name.replace(".", "_").replace(" ", "_"), attrib, getattr(node, attrib)))
+                        node_file.write("\t\t\tnode_{0}.{1} = {2}\n".format(replaceInvalidCharacters(node.name), attrib, getattr(node, attrib)))
                     node_file.write("\t\texcept:\n")
                     # this notifies a user of properties which failed to apply, not needed, only helpful for debugging
                     # node_file.write("\t\t\tprint(\"could not set {0} to {1} on node_{2}, this is most likely not problematic\")\n".format(attrib, getattr(node, attrib), node.name.replace(".", "_").replace(" ", "_")))
@@ -189,7 +196,7 @@ class SaveSelectedNodesOperator(bpy.types.Operator):
                 # then use split to get only the part containing the index, reverse again, so the number is right and split again to remove the last bracket
                 # somewhat like to cut | rev | cut ... in bash
                 # print(link.from_socket.path_from_id()[::-1].split("[")[0][::-1].split("]")[0])
-                node_file.write("\t\tlinkNodes(links, node_{0}, node_{1}, {2}, {3})\n".format(link.from_node.name.replace(".", "_").replace(" ", "_"), link.to_node.name.replace(".", "_").replace(" ", "_"), link.from_socket.path_from_id()[::-1].split("[")[0][::-1].split("]")[0], link.to_socket.path_from_id()[::-1].split("[")[0][::-1].split("]")[0]))
+                node_file.write("\t\tlinkNodes(links, node_{0}, node_{1}, {2}, {3})\n".format(replaceInvalidCharacters(link.from_node.name), replaceInvalidCharacters(link.to_node.name), link.from_socket.path_from_id()[::-1].split("[")[0][::-1].split("]")[0], link.to_socket.path_from_id()[::-1].split("[")[0][::-1].split("]")[0]))
 
         # remove meta node
         node_file.write("\t\tnode_tree_nodes.remove(self)\n")
