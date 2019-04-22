@@ -1,15 +1,22 @@
 import bpy
 import arm
 import os
+import importlib
 
 class SaveSelectedNodesOperator(bpy.types.Operator):
     bl_idname = "node.save_selected_nodes"
     bl_label = "Save Nodes To Library"
 
+    name = bpy.props.StringProperty(name = "Node Name: ", description = "The Name of the exported Nodes", default = "exported_node")
+    library = bpy.props.StringProperty(name = "Library Name: ", description = "The Name of the Library into which the noder are being exported", default = "exported_nodes")
+    
+    def invoke(self, context, event):
+        return context.window_manager.invoke_props_dialog(self)
+    
     def execute(self, context):
 
-        library_name = "exported_nodes"
-        node_name = "exported_nodes"
+        library_name = self.library
+        node_name = self.name
         fp = arm.utils.get_fp()
 
         lfp = fp+"/Libraries"
@@ -25,11 +32,11 @@ class SaveSelectedNodesOperator(bpy.types.Operator):
         # create blender.py to load the nodes
         bl_file = open(enfp+"/blender.py", "w")
         bl_file.write("import arm.nodes_logic\n")
-        bl_file.write("from node_definitions import *\n")
+        bl_file.write("from "+library_name+"_definitions import *\n")
         bl_file.write("def register():\n")
         bl_file.write("\tarm.nodes_logic.register_nodes()\n")
         
-        ndfp = enfp+"/node_definitions"
+        ndfp = enfp+"/"+library_name+"_definitions"
 
         if not os.path.exists(ndfp):
             os.makedirs(ndfp)
@@ -105,9 +112,17 @@ class SaveSelectedNodesOperator(bpy.types.Operator):
         # position nodes, based on their distance to the average location
         node_file.write("\t\t# create node layout\n")
         for node in nodes:
-            # print(node.bl_idname)
+            print(node.bl_idname)
             if node.bl_idname != "NodeFrame":
-                node_file.write("\t\tplaceNodeWithOffset(node_{0}, loc, [{1}, {2}])\n".format(node.name.replace(".", "_").replace(" ", "_"), node.location[0]-averageX, node.location[1]-averageY))
+                off_x = 0
+                off_y = 0
+                parent = node.parent
+                while parent is not None:
+                    print("add "+parent.bl_idname+" offset")
+                    off_x += parent.location[0]
+                    off_y += parent.location[1]
+                    parent = parent.parent
+                node_file.write("\t\tplaceNodeWithOffset(node_{0}, loc, [{1}, {2}])\n".format(node.name.replace(".", "_").replace(" ", "_"), node.location[0] + off_x - averageX, node.location[1] + off_y - averageY))
                 
         # handle frames
         node_file.write("\t\t# handle parenting, this is needed for frames\n")
@@ -180,6 +195,7 @@ class SaveSelectedNodesOperator(bpy.types.Operator):
         node_file.write("\t\tnode_tree_nodes.remove(self)\n")
         # add node to armory
         node_file.write("add_node({0}, category='{1}')".format(node_name+"_"+str(index), "Test"))
+
         return {'FINISHED'}
     
     @classmethod
