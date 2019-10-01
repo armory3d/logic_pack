@@ -106,6 +106,12 @@ class PlayerController extends LogicNode {
 			v.z *= revSpeed;
 			loc.sub(v);
 		}
+
+		// slower diagonal movement
+		if((fw || rev) && (lft || rgt)) {
+			loc.mult(0.707106); // 1/sqrt(2)
+		}
+
 		if(jmp) {
 			var v = player.transform.world.up();
 			v.x *= hgt;
