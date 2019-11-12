@@ -55,8 +55,8 @@ class LookingAtNode extends LogicNode {
 		var toVec:Vec4 = inputs[1].get();
 		
 		// face and main axis MUST be different
-		var face:Vec4 = inputs[2].get().normalize();
-		var mainAxis:Vec4 = inputs[3].get().normalize();
+		var face:Vec4 = inputs[2].get();
+		var mainAxis:Vec4 = inputs[3].get();
 		
 		// disable rotations
 		var disableMain:Bool = inputs[4].get();
@@ -74,6 +74,11 @@ class LookingAtNode extends LogicNode {
 		var restrictSecondaryMax:Float = inputs[11].get();
 
 		var mainAngle:Float = 0;
+
+		
+		face = face.normalize();
+		mainAxis = mainAxis.normalize();
+		
 		var dist:Vec4 = subvecs(toVec, fromVec);
 
 		inView = true;
