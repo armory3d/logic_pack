@@ -13,7 +13,9 @@ class LookingAtNode(Node, ArmLogicTreeNode):
 		self.inputs.new('NodeSocketVector', 'From Position')
 		self.inputs.new('NodeSocketVector', 'To Position')
 		self.inputs.new('NodeSocketVector', 'Front Facing')
+		self.inputs[-1].default_value = [1, 0, 0]
 		self.inputs.new('NodeSocketVector', 'Main Rotation Axis')
+		self.inputs[-1].default_value = [0, 0, 1]
 		self.inputs.new('NodeSocketBool', 'Disable Primary Roatation')
 		self.inputs.new('NodeSocketBool', 'Disable Secodary Roatation')
 		self.inputs.new('NodeSocketBool', 'Restrict Primary Rotation')
