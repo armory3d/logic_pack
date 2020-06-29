@@ -9,4 +9,4 @@
 
 ## Creating new nodes
 
-- http://armory3d.org/manual/#/dev/logicnodes
+- https://github.com/armory3d/armory/wiki/logicnodes
