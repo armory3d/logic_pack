@@ -3,7 +3,7 @@ from bpy.props import *
 from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
-class LerpVectorsNode(Node, ArmLogicTreeNode):
+class LerpVectorsNode(ArmLogicTreeNode):
     '''Lerp Vectors node'''
     bl_idname = 'LNLerpVectorsNode'
     bl_label = 'Lerp Vectors'
@@ -16,5 +16,5 @@ class LerpVectorsNode(Node, ArmLogicTreeNode):
         self.inputs.new('NodeSocketFloat', 'Time For Change')
         self.inputs.new('NodeSocketBool', 'Stop Interpolation')
         self.outputs.new('NodeSocketVector', 'Vector')
-        
+
 add_node(LerpVectorsNode, category='Value')

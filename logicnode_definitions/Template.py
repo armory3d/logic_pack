@@ -3,7 +3,7 @@ from bpy.props import *
 from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
-# class <NodeName>(Node, ArmLogicTreeNode):
+# class <NodeName>(ArmLogicTreeNode):
 #    '''<Short Desciption (optional)>'''
 #    bl_idname = 'LN<NodeName>'
 #    bl_label = '<Name of the Node inside Blender>'

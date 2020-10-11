@@ -3,7 +3,7 @@ from bpy.props import *
 from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
-class QuatToEulerNode(Node, ArmLogicTreeNode):
+class QuatToEulerNode(ArmLogicTreeNode):
     '''QuatToEulerNode'''
     bl_idname = 'LNQuatToEulerNode'
     bl_label = 'Quat To Euler'
@@ -15,6 +15,6 @@ class QuatToEulerNode(Node, ArmLogicTreeNode):
         self.inputs.new('NodeSocketFloat', 'Z')
         self.inputs.new('NodeSocketFloat', 'W')
         self.outputs.new('NodeSocketVector', 'Euler')
- 
+
 
 add_node(QuatToEulerNode, category='Value')

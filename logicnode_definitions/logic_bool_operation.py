@@ -3,7 +3,7 @@ from bpy.props import *
 from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
-class BoolOperationNode(Node, ArmLogicTreeNode):
+class BoolOperationNode(ArmLogicTreeNode):
 	'''Boolean Operations'''
 	bl_idname = 'LNBoolOperationNode'
 	bl_label = 'Boolean Operation'
@@ -25,10 +25,10 @@ class BoolOperationNode(Node, ArmLogicTreeNode):
 		self.inputs.new('NodeSocketBool', 'Input 1')
 		self.inputs.new('NodeSocketBool', 'Input 2')
 		self.outputs.new('NodeSocketBool', 'Output')
-	
+
 	def draw_buttons(self, context, layout):
 		layout.prop(self, 'property0')
-		
+
 		row = layout.row(align=True)
 		add_button = row.operator('arm.node_add_input', text='New', icon='PLUS', emboss=True)
 		add_button.node_index = str(id(self))

@@ -3,7 +3,7 @@ from bpy.props import *
 from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
-class CallFunctionNode(Node, ArmLogicTreeNode):
+class CallFunctionNode(ArmLogicTreeNode):
     '''Call Function Node'''
     bl_idname = 'LNCallFunctionNode'
     bl_label = 'Call Function'
@@ -27,5 +27,5 @@ class CallFunctionNode(Node, ArmLogicTreeNode):
         op.socket_type = 'NodeSocketShader'
         op2 = row.operator('arm.node_remove_input', text='', icon='X', emboss=True)
         op2.node_index = str(id(self))
-        
+
 add_node(CallFunctionNode, category='Event')

@@ -3,7 +3,7 @@ from bpy.props import *
 from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
-class SeparateQuatNode(Node, ArmLogicTreeNode):
+class SeparateQuatNode(ArmLogicTreeNode):
     '''SeparateQuatNode'''
     bl_idname = 'LNSeparateQuatNode'
     bl_label = 'Separate Quat'

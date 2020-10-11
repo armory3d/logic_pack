@@ -3,7 +3,7 @@ from bpy.props import *
 from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
-class TimerNode(Node, ArmLogicTreeNode):
+class TimerNode(ArmLogicTreeNode):
     '''TimerNode'''
     bl_idname = 'LNTimerNode'
     bl_label = 'Timer Node'
@@ -24,5 +24,5 @@ class TimerNode(Node, ArmLogicTreeNode):
 
         self.inputs.new('NodeSocketFloat', 'Seconds')
         self.inputs.new('NodeSocketInt', 'Repetitions (0 for oneshot, negative for unlimited)')
-        
+
 add_node(TimerNode, category='Logic')

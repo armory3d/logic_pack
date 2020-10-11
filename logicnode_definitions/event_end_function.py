@@ -3,7 +3,7 @@ from bpy.props import *
 from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
-class EndFunctionNode(Node, ArmLogicTreeNode):
+class EndFunctionNode(ArmLogicTreeNode):
     '''End Function Node'''
     bl_idname = 'LNEndFunctionNode'
     bl_label = 'End Function'
@@ -26,5 +26,5 @@ class EndFunctionNode(Node, ArmLogicTreeNode):
         op.socket_type = 'NodeSocketShader'
         op2 = row.operator('arm.node_remove_input', text='', icon='X', emboss=True)
         op2.node_index = str(id(self))
-        
+
 add_node(EndFunctionNode, category='Event')

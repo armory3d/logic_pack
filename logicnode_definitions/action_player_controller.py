@@ -3,7 +3,7 @@ from bpy.props import *
 from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
-class PlayerController(Node, ArmLogicTreeNode):
+class PlayerController(ArmLogicTreeNode):
     '''PlayerController'''
     bl_idname = 'LNPlayerController'
     bl_label = 'Player Controller'

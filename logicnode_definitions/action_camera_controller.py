@@ -4,7 +4,7 @@ from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
 
-class CameraController(Node, ArmLogicTreeNode):
+class CameraController(ArmLogicTreeNode):
     '''CameraController'''
     bl_idname = 'LNCameraController'
     bl_label = 'Camera Controller'
