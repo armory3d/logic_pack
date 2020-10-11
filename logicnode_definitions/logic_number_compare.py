@@ -3,12 +3,12 @@ from bpy.props import *
 from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
-class CompareNumberNode(Node, ArmLogicTreeNode):
-	'''Compares two numbers'''
+class CompareNumberNode(ArmLogicTreeNode):
+	"""Compares two numbers"""
 	bl_idname = 'LNCompareNumberNode'
 	bl_label = 'Compare Numbers'
 	bl_icon = 'QUESTION'
-	
+
 	property0: EnumProperty(
 		items = [('EQUAL', 'Equal', 'True, if both inputs are equal.'),
 				 ('ALMOST EQUAL', 'Almost Equal', 'True, if both inputs are almost (defined by threshold) equal.'),
@@ -22,10 +22,10 @@ class CompareNumberNode(Node, ArmLogicTreeNode):
 	property1: FloatProperty(name='Tolerance', description='Almost Equal threshold', default=0.0001)
 
 	def init(self, context):
-		self.inputs.new('NodeSocketInt', 'A')
-		self.inputs.new('NodeSocketInt', 'B')
-		self.outputs.new('NodeSocketBool', 'Result')
-	
+		self.add_input('NodeSocketInt', 'A')
+		self.add_input('NodeSocketInt', 'B')
+		self.add_output('NodeSocketBool', 'Result')
+
 	def draw_buttons(self, context, layout):
 		layout.prop(self, 'property0')
 		if self.property0 == 'ALMOST EQUAL':

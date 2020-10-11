@@ -3,20 +3,20 @@ from bpy.props import *
 from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
-class LookNode(Node, ArmLogicTreeNode):
-    '''Look Node'''
+class LookNode(ArmLogicTreeNode):
+    """Look Node"""
     bl_idname = 'LNLookNode'
     bl_label = 'Look'
     bl_icon = 'QUESTION'
 
     def init(self, context):
-        self.inputs.new('ArmNodeSocketAction', 'In')
-        self.inputs.new('ArmNodeSocketObject', 'Object')
-        self.inputs.new('NodeSocketVector', 'Vector')
-        self.inputs.new('NodeSocketBool', 'Look Y')
-        self.inputs.new('NodeSocketBool', 'Look Z')
-        self.inputs.new('NodeSocketFloat', 'Minimum')
-        self.inputs.new('NodeSocketFloat', 'Maximum')
-        self.outputs.new('ArmNodeSocketAction', 'Out')
-        
+        self.add_input('ArmNodeSocketAction', 'In')
+        self.add_input('ArmNodeSocketObject', 'Object')
+        self.add_input('NodeSocketVector', 'Vector')
+        self.add_input('NodeSocketBool', 'Look Y')
+        self.add_input('NodeSocketBool', 'Look Z')
+        self.add_input('NodeSocketFloat', 'Minimum')
+        self.add_input('NodeSocketFloat', 'Maximum')
+        self.add_output('ArmNodeSocketAction', 'Out')
+
 add_node(LookNode, category='Action')

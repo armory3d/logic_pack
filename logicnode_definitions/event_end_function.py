@@ -3,8 +3,8 @@ from bpy.props import *
 from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
-class EndFunctionNode(Node, ArmLogicTreeNode):
-    '''End Function Node'''
+class EndFunctionNode(ArmLogicTreeNode):
+    """End Function Node"""
     bl_idname = 'LNEndFunctionNode'
     bl_label = 'End Function'
     bl_icon = 'QUESTION'
@@ -14,9 +14,9 @@ class EndFunctionNode(Node, ArmLogicTreeNode):
         array_nodes[str(id(self))] = self
 
     def init(self, context):
-        self.outputs.new('ArmNodeSocketAction', 'Out')
-        self.inputs.new('ArmNodeSocketAction', 'In')
-        self.inputs.new('NodeSocketString', 'Function')
+        self.add_output('ArmNodeSocketAction', 'Out')
+        self.add_input('ArmNodeSocketAction', 'In')
+        self.add_input('NodeSocketString', 'Function')
 
     def draw_buttons(self, context, layout):
         row = layout.row(align=True)
@@ -26,5 +26,5 @@ class EndFunctionNode(Node, ArmLogicTreeNode):
         op.socket_type = 'NodeSocketShader'
         op2 = row.operator('arm.node_remove_input', text='', icon='X', emboss=True)
         op2.node_index = str(id(self))
-        
+
 add_node(EndFunctionNode, category='Event')

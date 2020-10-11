@@ -3,8 +3,8 @@ from bpy.props import *
 from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
-class CallFunctionNode(Node, ArmLogicTreeNode):
-    '''Call Function Node'''
+class CallFunctionNode(ArmLogicTreeNode):
+    """Call Function Node"""
     bl_idname = 'LNCallFunctionNode'
     bl_label = 'Call Function'
     bl_icon = 'QUESTION'
@@ -14,10 +14,10 @@ class CallFunctionNode(Node, ArmLogicTreeNode):
         array_nodes[str(id(self))] = self
 
     def init(self, context):
-        self.outputs.new('ArmNodeSocketAction', 'Out')
-        self.inputs.new('ArmNodeSocketAction', 'In')
-        self.inputs.new('NodeSocketString', 'Function')
-        self.inputs.new('NodeSocketInt', 'ID')
+        self.add_output('ArmNodeSocketAction', 'Out')
+        self.add_input('ArmNodeSocketAction', 'In')
+        self.add_input('NodeSocketString', 'Function')
+        self.add_input('NodeSocketInt', 'ID')
 
     def draw_buttons(self, context, layout):
         row = layout.row(align=True)
@@ -27,5 +27,5 @@ class CallFunctionNode(Node, ArmLogicTreeNode):
         op.socket_type = 'NodeSocketShader'
         op2 = row.operator('arm.node_remove_input', text='', icon='X', emboss=True)
         op2.node_index = str(id(self))
-        
+
 add_node(CallFunctionNode, category='Event')
