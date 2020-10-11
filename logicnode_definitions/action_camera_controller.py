@@ -5,7 +5,7 @@ from arm.logicnode.arm_nodes import *
 
 
 class CameraController(ArmLogicTreeNode):
-    '''CameraController'''
+    """CameraController"""
     bl_idname = 'LNCameraController'
     bl_label = 'Camera Controller'
     bl_icon = 'QUESTION'

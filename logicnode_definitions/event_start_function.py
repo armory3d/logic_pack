@@ -4,7 +4,7 @@ from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
 class StartFunctionNode(ArmLogicTreeNode):
-    '''Start Function Node'''
+    """Start Function Node"""
     bl_idname = 'LNStartFunctionNode'
     bl_label = 'Start Function'
     bl_icon = 'CURVE_PATH'

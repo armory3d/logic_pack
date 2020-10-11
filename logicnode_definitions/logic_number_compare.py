@@ -4,7 +4,7 @@ from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
 class CompareNumberNode(ArmLogicTreeNode):
-	'''Compares two numbers'''
+	"""Compares two numbers"""
 	bl_idname = 'LNCompareNumberNode'
 	bl_label = 'Compare Numbers'
 	bl_icon = 'QUESTION'

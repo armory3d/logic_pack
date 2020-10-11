@@ -4,7 +4,7 @@ from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
 class LookingAtNode(ArmLogicTreeNode):
-	'''Looking at Node'''
+	"""Looking at Node"""
 	bl_idname = 'LNLookingAtNode'
 	bl_label = 'Looking At'
 	bl_icon = 'QUESTION'

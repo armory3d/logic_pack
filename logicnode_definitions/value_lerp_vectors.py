@@ -4,7 +4,7 @@ from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
 class LerpVectorsNode(ArmLogicTreeNode):
-    '''Lerp Vectors node'''
+    """Lerp Vectors node"""
     bl_idname = 'LNLerpVectorsNode'
     bl_label = 'Lerp Vectors'
     bl_icon = 'QUESTION'

@@ -10,11 +10,11 @@ class SaveSelectedNodesOperator(bpy.types.Operator):
     name: bpy.props.StringProperty(name = "Node Name: ", description = "The Name of the exported Nodes", default = "exported_node")
     library: bpy.props.StringProperty(name = "Library Name: ", description = "The Name of the Library into which the noder are being exported", default = "exported_nodes")
     category: bpy.props.StringProperty(name = "Node Category: ", description = "The Category of the exported Nodes", default = "exported_nodes")
-    
-    
+
+
     def invoke(self, context, event):
         return context.window_manager.invoke_props_dialog(self)
-    
+
     def execute(self, context):
 
         invalidCharacters = [" ", ".", "/", "\\", ":", ";"]
@@ -29,12 +29,12 @@ class SaveSelectedNodesOperator(bpy.types.Operator):
         fp = arm.utils.get_fp()
 
         lfp = fp+"/Libraries"
-        
+
         if not os.path.exists(lfp):
             os.makedirs(lfp)
 
         enfp = lfp+"/"+library_name
-        
+
         if not os.path.exists(enfp):
             os.makedirs(enfp)
 
@@ -44,7 +44,7 @@ class SaveSelectedNodesOperator(bpy.types.Operator):
         bl_file.write("from "+library_name+"_definitions import *\n")
         bl_file.write("def register():\n")
         bl_file.write("\tarm.nodes_logic.register_nodes()\n")
-        
+
         ndfp = enfp+"/"+library_name+"_definitions"
 
         if not os.path.exists(ndfp):
@@ -65,29 +65,29 @@ class SaveSelectedNodesOperator(bpy.types.Operator):
         while os.path.isfile(ndfp+"/"+file_name+str(index)+".py"):
             index += 1
         file_name += str(index) + ".py"
-            
+
         node_file = open(ndfp+"/"+file_name,"w")
         node_file.write("import bpy\n")
         node_file.write("from bpy.props import *\n")
         node_file.write("from bpy.types import Node, NodeSocket\n")
         node_file.write("from arm.logicnode.arm_nodes import *\n")
-        
+
         # give the node the same name that is used for the file for now...
-        node_file.write("class {0}(Node, ArmLogicTreeNode):\n".format(node_name+"_"+str(index)))
-        node_file.write("\t'''{0}'''\n".format(node_name+"_"+str(index)))
+        node_file.write("class {0}(ArmLogicTreeNode):\n".format(node_name+"_"+str(index)))
+        node_file.write('\t"""{0}"""\n'.format(node_name+"_"+str(index)))
         node_file.write("\tbl_idname=\"LN{0}\"\n".format(node_name+"_"+str(index)))
         node_file.write("\tbl_label=\"{0}\"\n".format(node_name))
         node_file.write("\tbl_icon=\"QUESTION\"\n")
-        
+
         node_file.write("\tdef init(self, context):\n")
         node_file.write("\t\t# convenience functions\n")
         node_file.write("\t\tdef placeNodeWithOffset(node, reference, offset):\n")
         node_file.write("\t\t\tnode.location = [reference[0]+offset[0], reference[1]+offset[1]]\n\n")
-            
+
         # node_file.write("\t\tdef selectNodes(node_tree, nodes):\n")
         # node_file.write("\t\t\tfor node in nodes:\n")
         # node_file.write("\t\t\t\tnode.select = True\n\n")
-                    
+
         # node_file.write("\t\tdef frameNodes(node_tree, nodes, title):\n")
         # node_file.write("\t\t\tbpy.ops.node.select_all(action='DESELECT')\n")
         # node_file.write("\t\t\tselectNodes(node_tree, nodes)\n")
@@ -95,7 +95,7 @@ class SaveSelectedNodesOperator(bpy.types.Operator):
         # node_file.write("\t\t\tframe = node_tree.active\n")
         # node_file.write("\t\t\tframe.label = title\n")
         # node_file.write("\t\t\treturn frame\n\n")
-            
+
         node_file.write("\t\tdef linkNodes(node_links, node_1, node_2, output_socket_index, input_socket_index):\n")
         node_file.write("\t\t\tlinks.new(node_1.outputs[output_socket_index], node_2.inputs[input_socket_index])\n\n")
 
@@ -103,8 +103,8 @@ class SaveSelectedNodesOperator(bpy.types.Operator):
         node_file.write("\t\tnode_tree_nodes = bpy.context.space_data.node_tree.nodes\n")
         node_file.write("\t\tlinks = bpy.context.space_data.node_tree.links\n")
         node_file.write("\t\tloc = bpy.context.space_data.cursor_location\n\n")
-        
-        
+
+
         node_tree = context.space_data.node_tree
         nodes = context.selected_nodes
         links = node_tree.links
@@ -117,7 +117,7 @@ class SaveSelectedNodesOperator(bpy.types.Operator):
             node_file.write("\t\tnode_{0} = node_tree_nodes.new(\"{1}\")\n".format(replaceInvalidCharacters(node.name), node.bl_idname))
             averageX += node.location[0]/len(nodes)
             averageY += node.location[1]/len(nodes)
-        
+
         # position nodes, based on their distance to the average location
         node_file.write("\t\t# create node layout\n")
         for node in nodes:
@@ -132,7 +132,7 @@ class SaveSelectedNodesOperator(bpy.types.Operator):
                     off_y += parent.location[1]
                     parent = parent.parent
                 node_file.write("\t\tplaceNodeWithOffset(node_{0}, loc, [{1}, {2}])\n".format(replaceInvalidCharacters(node.name), node.location[0] + off_x - averageX, node.location[1] + off_y - averageY))
-                
+
         # handle frames
         node_file.write("\t\t# handle parenting, this is needed for frames\n")
         for node in nodes:
@@ -206,7 +206,7 @@ class SaveSelectedNodesOperator(bpy.types.Operator):
         node_file.write("add_node({0}, category='{1}')".format(node_name+"_"+str(index), self.category))
 
         return {'FINISHED'}
-    
+
     @classmethod
     def poll(cls, context):
         return context.space_data != None and context.space_data.type == 'NODE_EDITOR'

@@ -4,7 +4,7 @@ from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
 class PlayerController(ArmLogicTreeNode):
-    '''PlayerController'''
+    """PlayerController"""
     bl_idname = 'LNPlayerController'
     bl_label = 'Player Controller'
     bl_icon = 'QUESTION'

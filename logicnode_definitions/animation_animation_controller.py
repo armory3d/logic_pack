@@ -4,7 +4,7 @@ from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
 class AnimationControllerNode(ArmLogicTreeNode):
-    '''AnimationController node'''
+    """AnimationController node"""
     bl_idname = 'LNAnimationControllerNode'
     bl_label = 'AnimationController'
     bl_icon = 'QUESTION'

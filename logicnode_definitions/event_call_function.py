@@ -4,7 +4,7 @@ from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
 class CallFunctionNode(ArmLogicTreeNode):
-    '''Call Function Node'''
+    """Call Function Node"""
     bl_idname = 'LNCallFunctionNode'
     bl_label = 'Call Function'
     bl_icon = 'QUESTION'

@@ -4,7 +4,7 @@ from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
 class GetContactCoordsNode(ArmLogicTreeNode):
-    '''Get contact coords Node'''
+    """Get contact coords Node"""
     bl_idname = 'LNGetContactCoordsNode'
     bl_label = 'Get Contact Coords'
     bl_icon = 'QUESTION'

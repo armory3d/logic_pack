@@ -4,7 +4,7 @@ from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
 class EndFunctionNode(ArmLogicTreeNode):
-    '''End Function Node'''
+    """End Function Node"""
     bl_idname = 'LNEndFunctionNode'
     bl_label = 'End Function'
     bl_icon = 'QUESTION'

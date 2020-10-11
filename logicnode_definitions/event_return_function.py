@@ -4,7 +4,7 @@ from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
 class ReturnFunctionNode(ArmLogicTreeNode):
-    '''Return Function Node'''
+    """Return Function Node"""
     bl_idname = 'LNReturnFunctionNode'
     bl_label = 'Return Function'
     bl_icon = 'CURVE_PATH'

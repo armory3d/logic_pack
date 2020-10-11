@@ -4,7 +4,7 @@ from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
 class LookNode(ArmLogicTreeNode):
-    '''Look Node'''
+    """Look Node"""
     bl_idname = 'LNLookNode'
     bl_label = 'Look'
     bl_icon = 'QUESTION'

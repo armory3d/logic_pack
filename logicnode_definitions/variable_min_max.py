@@ -4,7 +4,7 @@ from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
 class MinMaxNode(ArmLogicTreeNode):
-    '''Min/Max Node'''
+    """Min/Max Node"""
     bl_idname = 'LNMinMaxNode'
     bl_label = 'Clamp Variable'
     bl_icon = 'QUESTION'

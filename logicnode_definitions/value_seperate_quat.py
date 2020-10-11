@@ -4,7 +4,7 @@ from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
 class SeparateQuatNode(ArmLogicTreeNode):
-    '''SeparateQuatNode'''
+    """SeparateQuatNode"""
     bl_idname = 'LNSeparateQuatNode'
     bl_label = 'Separate Quat'
     bl_icon = 'QUESTION'

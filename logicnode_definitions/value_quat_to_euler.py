@@ -4,7 +4,7 @@ from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
 class QuatToEulerNode(ArmLogicTreeNode):
-    '''QuatToEulerNode'''
+    """QuatToEulerNode"""
     bl_idname = 'LNQuatToEulerNode'
     bl_label = 'Quat To Euler'
     bl_icon = 'QUESTION'

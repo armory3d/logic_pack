@@ -4,7 +4,7 @@ from bpy.types import Node, NodeSocket
 from arm.logicnode.arm_nodes import *
 
 class ArrayLoopIndiceNode(ArmLogicTreeNode):
-    '''ArrayLoop node avec indice'''
+    """ArrayLoop node avec indice"""
     bl_idname = 'LNArrayLoopIndiceNode'
     bl_label = 'Array Loop Indice'
     bl_icon = 'CURVE_PATH'
