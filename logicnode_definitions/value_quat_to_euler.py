@@ -10,11 +10,11 @@ class QuatToEulerNode(ArmLogicTreeNode):
     bl_icon = 'QUESTION'
 
     def init(self, context):
-        self.inputs.new('NodeSocketFloat', 'X')
-        self.inputs.new('NodeSocketFloat', 'Y')
-        self.inputs.new('NodeSocketFloat', 'Z')
-        self.inputs.new('NodeSocketFloat', 'W')
-        self.outputs.new('NodeSocketVector', 'Euler')
+        self.add_input('NodeSocketFloat', 'X')
+        self.add_input('NodeSocketFloat', 'Y')
+        self.add_input('NodeSocketFloat', 'Z')
+        self.add_input('NodeSocketFloat', 'W')
+        self.add_output('NodeSocketVector', 'Euler')
 
 
 add_node(QuatToEulerNode, category='Value')

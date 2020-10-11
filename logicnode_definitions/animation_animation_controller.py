@@ -13,16 +13,13 @@ class AnimationControllerNode(ArmLogicTreeNode):
         array_nodes[str(id(self))] = self
 
     def init(self, context):
-        self.outputs.new('ArmNodeSocketAction', 'Out')
-        self.outputs.new('ArmNodeSocketAction', 'Done')
+        self.add_output('ArmNodeSocketAction', 'Out')
+        self.add_output('ArmNodeSocketAction', 'Done')
 
-        self.inputs.new('ArmNodeSocketAction', 'In')
-        self.inputs.new('ArmNodeSocketObject', 'Animated Object')
-        self.inputs[-1].default_value = 'Animated Object'
-        self.inputs.new('ArmNodeSocketAnimAction', 'Idle')
-        self.inputs[-1].default_value = 'Idle'
-        self.inputs.new('NodeSocketFloat', 'Blend Time')
-        self.inputs[-1].default_value = 0.2
+        self.add_input('ArmNodeSocketAction', 'In')
+        self.add_input('ArmNodeSocketObject', 'Animated Object', default_value='Animated Object')
+        self.add_input('ArmNodeSocketAnimAction', 'Idle', default_value='Idle')
+        self.add_input('NodeSocketFloat', 'Blend Time', default_value=0.2)
 
 
     def draw_buttons(self, context, layout):

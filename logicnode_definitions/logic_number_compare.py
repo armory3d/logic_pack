@@ -22,9 +22,9 @@ class CompareNumberNode(ArmLogicTreeNode):
 	property1: FloatProperty(name='Tolerance', description='Almost Equal threshold', default=0.0001)
 
 	def init(self, context):
-		self.inputs.new('NodeSocketInt', 'A')
-		self.inputs.new('NodeSocketInt', 'B')
-		self.outputs.new('NodeSocketBool', 'Result')
+		self.add_input('NodeSocketInt', 'A')
+		self.add_input('NodeSocketInt', 'B')
+		self.add_output('NodeSocketBool', 'Result')
 
 	def draw_buttons(self, context, layout):
 		layout.prop(self, 'property0')

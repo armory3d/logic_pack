@@ -10,44 +10,34 @@ class PlayerController(ArmLogicTreeNode):
     bl_icon = 'QUESTION'
 
     def init(self, context):
-        self.outputs.new('ArmNodeSocketAction', 'Out')
+        self.add_output('ArmNodeSocketAction', 'Out')
 
-        self.inputs.new('ArmNodeSocketAction', 'Activate')
+        self.add_input('ArmNodeSocketAction', 'Activate')
 
-        self.inputs.new('ArmNodeSocketObject', 'Player Object')
-        self.inputs[-1].default_value = 'Player'
+        self.add_input('ArmNodeSocketObject', 'Player Object', default_value='Player')
 
-        self.inputs.new('NodeSocketFloat', 'Overall Speed Modifier')
-        self.inputs[-1].default_value = 1.0
+        self.add_input('NodeSocketFloat', 'Overall Speed Modifier', default_value=1.0)
 
-        self.inputs.new('NodeSocketBool', 'Forward')
-        self.inputs.new('NodeSocketFloat', 'Forward Speed')
-        self.inputs[-1].default_value = 1.0
+        self.add_input('NodeSocketBool', 'Forward')
+        self.add_input('NodeSocketFloat', 'Forward Speed', default_value=1.0)
 
-        self.inputs.new('NodeSocketBool', 'Left')
-        self.inputs.new('NodeSocketFloat', 'Left Speed')
-        self.inputs[-1].default_value = 1.0
+        self.add_input('NodeSocketBool', 'Left')
+        self.add_input('NodeSocketFloat', 'Left Speed', default_value=1.0)
 
-        self.inputs.new('NodeSocketBool', 'Right')
-        self.inputs.new('NodeSocketFloat', 'Right Speed')
-        self.inputs[-1].default_value = 1.0
+        self.add_input('NodeSocketBool', 'Right')
+        self.add_input('NodeSocketFloat', 'Right Speed', default_value=1.0)
 
-        self.inputs.new('NodeSocketBool', 'Reverse')
-        self.inputs.new('NodeSocketFloat', 'Reverse Speed')
-        self.inputs[-1].default_value = 1.0
+        self.add_input('NodeSocketBool', 'Reverse')
+        self.add_input('NodeSocketFloat', 'Reverse Speed', default_value=1.0)
 
-        self.inputs.new('NodeSocketBool', 'Jump')
-        self.inputs.new('NodeSocketFloat', 'Jump Height')
-        self.inputs[-1].default_value = 1.0
+        self.add_input('NodeSocketBool', 'Jump')
+        self.add_input('NodeSocketFloat', 'Jump Height', default_value=1.0)
 
-        self.inputs.new('NodeSocketBool', 'Run')
-        self.inputs.new('NodeSocketFloat', 'Run Multiplier')
-        self.inputs[-1].default_value = 1.5
+        self.add_input('NodeSocketBool', 'Run')
+        self.add_input('NodeSocketFloat', 'Run Multiplier', default_value=1.5)
 
-        self.inputs.new('NodeSocketBool', 'Crouch')
-        self.inputs.new('NodeSocketBool', 'Hold for crouch')
-        self.inputs[-1].default_value = 1
-        self.inputs.new('NodeSocketFloat', 'Crouch Multiplier')
-        self.inputs[-1].default_value = 0.5
+        self.add_input('NodeSocketBool', 'Crouch')
+        self.add_input('NodeSocketBool', 'Hold for crouch', default_value=1)
+        self.add_input('NodeSocketFloat', 'Crouch Multiplier', default_value=0.5)
 
 add_node(PlayerController, category='Action')

@@ -10,8 +10,8 @@ class GetContactCoordsNode(ArmLogicTreeNode):
     bl_icon = 'QUESTION'
 
     def init(self, context):
-        self.inputs.new('ArmNodeSocketObject', 'Object')
-        self.outputs.new('ArmNodeSocketArray', 'Array')
-        self.outputs.new('ArmNodeSocketArray', 'Coords')
+        self.add_input('ArmNodeSocketObject', 'Object')
+        self.add_output('ArmNodeSocketArray', 'Array')
+        self.add_output('ArmNodeSocketArray', 'Coords')
 
 add_node(GetContactCoordsNode, category='Physics')

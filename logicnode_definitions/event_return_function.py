@@ -15,8 +15,8 @@ class ReturnFunctionNode(ArmLogicTreeNode):
         array_nodes[str(id(self))] = self
 
     def init(self, context):
-        self.outputs.new('ArmNodeSocketAction', 'Out')
-        self.inputs.new('NodeSocketInt', 'ID')
+        self.add_output('ArmNodeSocketAction', 'Out')
+        self.add_input('NodeSocketInt', 'ID')
 
     def draw_buttons(self, context, layout):
         layout.prop(self, 'property0')

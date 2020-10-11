@@ -10,11 +10,11 @@ class LerpVectorsNode(ArmLogicTreeNode):
     bl_icon = 'QUESTION'
 
     def init(self, context):
-        self.inputs.new('ArmNodeSocketAction', 'In')
-        self.inputs.new('NodeSocketVector', 'Starting Vector')
-        self.inputs.new('NodeSocketVector', 'End Vector')
-        self.inputs.new('NodeSocketFloat', 'Time For Change')
-        self.inputs.new('NodeSocketBool', 'Stop Interpolation')
-        self.outputs.new('NodeSocketVector', 'Vector')
+        self.add_input('ArmNodeSocketAction', 'In')
+        self.add_input('NodeSocketVector', 'Starting Vector')
+        self.add_input('NodeSocketVector', 'End Vector')
+        self.add_input('NodeSocketFloat', 'Time For Change')
+        self.add_input('NodeSocketBool', 'Stop Interpolation')
+        self.add_output('NodeSocketVector', 'Vector')
 
 add_node(LerpVectorsNode, category='Value')

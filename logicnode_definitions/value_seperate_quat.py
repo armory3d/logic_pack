@@ -10,11 +10,11 @@ class SeparateQuatNode(ArmLogicTreeNode):
     bl_icon = 'QUESTION'
 
     def init(self, context):
-        self.inputs.new('NodeSocketVector', 'Quat')
-        self.outputs.new('NodeSocketFloat', 'X')
-        self.outputs.new('NodeSocketFloat', 'Y')
-        self.outputs.new('NodeSocketFloat', 'Z')
-        self.outputs.new('NodeSocketFloat', 'W')
-        self.outputs.new('NodeSocketVector', 'Euler')
+        self.add_input('NodeSocketVector', 'Quat')
+        self.add_output('NodeSocketFloat', 'X')
+        self.add_output('NodeSocketFloat', 'Y')
+        self.add_output('NodeSocketFloat', 'Z')
+        self.add_output('NodeSocketFloat', 'W')
+        self.add_output('NodeSocketVector', 'Euler')
 
 add_node(SeparateQuatNode, category='Value')

@@ -10,7 +10,7 @@ from arm.logicnode.arm_nodes import *
 #    bl_icon = 'QUESTION'
 
 #    def init(self, context):
-#        self.inputs.new('<SocketType>', '<SocketName>')
-#        self.outputs.new('<SocketType>', '<SocketName>')
+#        self.add_input('<SocketType>', '<SocketName>')
+#        self.add_output('<SocketType>', '<SocketName>')
 
 # add_node(<NodeName>, category='<Category of the node>')

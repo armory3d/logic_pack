@@ -10,22 +10,22 @@ class LookingAtNode(ArmLogicTreeNode):
 	bl_icon = 'QUESTION'
 
 	def init(self, context):
-		self.inputs.new('NodeSocketVector', 'From Position')
-		self.inputs.new('NodeSocketVector', 'To Position')
-		self.inputs.new('NodeSocketVector', 'Front Facing')
+		self.add_input('NodeSocketVector', 'From Position')
+		self.add_input('NodeSocketVector', 'To Position')
+		self.add_input('NodeSocketVector', 'Front Facing')
 		self.inputs[-1].default_value = [1, 0, 0]
-		self.inputs.new('NodeSocketVector', 'Main Rotation Axis')
+		self.add_input('NodeSocketVector', 'Main Rotation Axis')
 		self.inputs[-1].default_value = [0, 0, 1]
-		self.inputs.new('NodeSocketBool', 'Disable Primary Roatation')
-		self.inputs.new('NodeSocketBool', 'Disable Secodary Roatation')
-		self.inputs.new('NodeSocketBool', 'Restrict Primary Rotation')
-		self.inputs.new('NodeSocketFloat', 'min Primary Rotation')
-		self.inputs.new('NodeSocketFloat', 'max Primary Rotation')
-		self.inputs.new('NodeSocketBool', 'Restrict Secondary Rotation')
-		self.inputs.new('NodeSocketFloat', 'min Secondary Rotation')
-		self.inputs.new('NodeSocketFloat', 'max Secondary Rotation')
-		self.outputs.new('NodeSocketVector', 'Rotation (Euler)')
-		self.outputs.new('NodeSocketVector', 'Rotation (Quat)')
-		self.outputs.new('NodeSocketBool', 'Is in field of view')
+		self.add_input('NodeSocketBool', 'Disable Primary Roatation')
+		self.add_input('NodeSocketBool', 'Disable Secodary Roatation')
+		self.add_input('NodeSocketBool', 'Restrict Primary Rotation')
+		self.add_input('NodeSocketFloat', 'min Primary Rotation')
+		self.add_input('NodeSocketFloat', 'max Primary Rotation')
+		self.add_input('NodeSocketBool', 'Restrict Secondary Rotation')
+		self.add_input('NodeSocketFloat', 'min Secondary Rotation')
+		self.add_input('NodeSocketFloat', 'max Secondary Rotation')
+		self.add_output('NodeSocketVector', 'Rotation (Euler)')
+		self.add_output('NodeSocketVector', 'Rotation (Quat)')
+		self.add_output('NodeSocketBool', 'Is in field of view')
 
 add_node(LookingAtNode, category='Action')

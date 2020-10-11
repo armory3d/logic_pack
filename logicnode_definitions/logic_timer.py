@@ -10,19 +10,19 @@ class TimerNode(ArmLogicTreeNode):
     bl_icon = 'QUESTION'
 
     def init(self, context):
-        self.outputs.new('ArmNodeSocketAction', 'Out')
-        self.outputs.new('ArmNodeSocketAction', 'Done')
-        self.outputs.new('NodeSocketBool', 'Running')
-        self.outputs.new('NodeSocketBool', 'Paused')
-        self.outputs.new('NodeSocketFloat', 'Seconds left')
-        self.outputs.new('NodeSocketFloat', 'Progress (in %)')
-        self.outputs.new('NodeSocketInt', 'Repetitions done')
+        self.add_output('ArmNodeSocketAction', 'Out')
+        self.add_output('ArmNodeSocketAction', 'Done')
+        self.add_output('NodeSocketBool', 'Running')
+        self.add_output('NodeSocketBool', 'Paused')
+        self.add_output('NodeSocketFloat', 'Seconds left')
+        self.add_output('NodeSocketFloat', 'Progress (in %)')
+        self.add_output('NodeSocketInt', 'Repetitions done')
 
-        self.inputs.new('ArmNodeSocketAction', 'Start')
-        self.inputs.new('NodeSocketBool', 'Pause')
-        self.inputs.new('NodeSocketBool', 'Stop')
+        self.add_input('ArmNodeSocketAction', 'Start')
+        self.add_input('NodeSocketBool', 'Pause')
+        self.add_input('NodeSocketBool', 'Stop')
 
-        self.inputs.new('NodeSocketFloat', 'Seconds')
-        self.inputs.new('NodeSocketInt', 'Repetitions (0 for oneshot, negative for unlimited)')
+        self.add_input('NodeSocketFloat', 'Seconds')
+        self.add_input('NodeSocketInt', 'Repetitions (0 for oneshot, negative for unlimited)')
 
 add_node(TimerNode, category='Logic')
