@@ -1,15 +1,22 @@
 import bpy
 from bpy.props import *
 from bpy.types import Node, NodeSocket
+
 from arm.logicnode.arm_nodes import *
+
+import logicnode_definitions
+
 
 class TimerNode(ArmLogicTreeNode):
     """TimerNode"""
     bl_idname = 'LNTimerNode'
     bl_label = 'Timer Node'
-    bl_icon = 'QUESTION'
 
-    def init(self, context):
+    arm_category = logicnode_definitions.CATEGORY_NAME
+    arm_section = 'logic'
+    arm_version = 1
+
+    def arm_init(self, context):
         self.add_output('ArmNodeSocketAction', 'Out')
         self.add_output('ArmNodeSocketAction', 'Done')
         self.add_output('NodeSocketBool', 'Running')
@@ -24,5 +31,3 @@ class TimerNode(ArmLogicTreeNode):
 
         self.add_input('NodeSocketFloat', 'Seconds')
         self.add_input('NodeSocketInt', 'Repetitions (0 for oneshot, negative for unlimited)')
-
-add_node(TimerNode, category='Logic')
