@@ -1,16 +1,22 @@
 import bpy
 from bpy.props import *
 from bpy.types import Node, NodeSocket
+
 from arm.logicnode.arm_nodes import *
+
+import logicnode_definitions
 
 
 class CameraController(ArmLogicTreeNode):
-    """CameraController"""
+    """Camera Controller"""
     bl_idname = 'LNCameraController'
     bl_label = 'Camera Controller'
-    bl_icon = 'QUESTION'
 
-    def init(self, context):
+    arm_category = logicnode_definitions.CATEGORY_NAME
+    arm_section = 'controllers'
+    arm_version = 1
+
+    def arm_init(self, context):
         self.add_output('ArmNodeSocketAction', 'Out')
 
         self.add_input('ArmNodeSocketAction', 'Activate')
@@ -36,6 +42,3 @@ class CameraController(ArmLogicTreeNode):
         self.add_input('NodeSocketBool', 'Restrict Vertical')
         self.add_input('NodeSocketFloat', 'vMin (Radians)')
         self.add_input('NodeSocketFloat', 'vMax (Radians)')
-
-
-add_node(CameraController, category='Action')

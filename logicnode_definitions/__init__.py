@@ -1,5 +1,8 @@
-# Import all nodes
-from os.path import dirname, basename, isfile
-import glob
-modules = glob.glob(dirname(__file__)+"/*.py")
-__all__ = [basename(f)[:-3] for f in modules if isfile(f)]
+import arm.logicnode
+
+CATEGORY_NAME = 'Armory Logic Pack'
+
+
+def register_all():
+    """Import all nodes in this node package."""
+    arm.logicnode.init_nodes(__path__, __package__)

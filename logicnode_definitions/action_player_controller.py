@@ -1,15 +1,22 @@
 import bpy
 from bpy.props import *
 from bpy.types import Node, NodeSocket
+
 from arm.logicnode.arm_nodes import *
+
+import logicnode_definitions
+
 
 class PlayerController(ArmLogicTreeNode):
     """PlayerController"""
     bl_idname = 'LNPlayerController'
     bl_label = 'Player Controller'
-    bl_icon = 'QUESTION'
 
-    def init(self, context):
+    arm_category = logicnode_definitions.CATEGORY_NAME
+    arm_section = 'controllers'
+    arm_version = 1
+
+    def arm_init(self, context):
         self.add_output('ArmNodeSocketAction', 'Out')
 
         self.add_input('ArmNodeSocketAction', 'Activate')
@@ -39,5 +46,3 @@ class PlayerController(ArmLogicTreeNode):
         self.add_input('NodeSocketBool', 'Crouch')
         self.add_input('NodeSocketBool', 'Hold for crouch', default_value=1)
         self.add_input('NodeSocketFloat', 'Crouch Multiplier', default_value=0.5)
-
-add_node(PlayerController, category='Action')

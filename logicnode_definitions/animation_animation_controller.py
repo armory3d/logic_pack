@@ -1,18 +1,25 @@
 import bpy
 from bpy.props import *
 from bpy.types import Node, NodeSocket
+
 from arm.logicnode.arm_nodes import *
+
+import logicnode_definitions
+
 
 class AnimationControllerNode(ArmLogicTreeNode):
     """AnimationController node"""
     bl_idname = 'LNAnimationControllerNode'
     bl_label = 'AnimationController'
-    bl_icon = 'QUESTION'
+
+    arm_category = logicnode_definitions.CATEGORY_NAME
+    arm_section = 'controllers'
+    arm_version = 1
 
     def __init__(self):
         array_nodes[str(id(self))] = self
 
-    def init(self, context):
+    def arm_init(self, context):
         self.add_output('ArmNodeSocketAction', 'Out')
         self.add_output('ArmNodeSocketAction', 'Done')
 
@@ -40,5 +47,3 @@ class AnimationControllerNode(ArmLogicTreeNode):
 
         op4 = row2.operator('arm.node_remove_input', text='', icon='X', emboss=True)
         op4.node_index = str(id(self))
-
-add_node(AnimationControllerNode, category='Animation')
