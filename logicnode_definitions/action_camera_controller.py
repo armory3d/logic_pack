@@ -21,9 +21,9 @@ class CameraController(ArmLogicTreeNode):
 
         self.add_input('ArmNodeSocketAction', 'Activate')
 
-        self.add_input('ArmNodeSocketObject', 'Player Object', default_value='Player')
+        self.add_input('ArmNodeSocketObject', 'Player Object')
 
-        self.add_input('ArmNodeSocketObject', 'Camera Object', default_value='Camera')
+        self.add_input('ArmNodeSocketObject', 'Camera Object')
 
         self.add_input('NodeSocketFloat', 'Speed Modifier', default_value=1.0)
         self.add_input('NodeSocketBool', 'Additional Modifier (e.g. sniper)')
