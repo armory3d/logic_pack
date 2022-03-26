@@ -21,7 +21,7 @@ class PlayerController(ArmLogicTreeNode):
 
         self.add_input('ArmNodeSocketAction', 'Activate')
 
-        self.add_input('ArmNodeSocketObject', 'Player Object', default_value='Player')
+        self.add_input('ArmNodeSocketObject', 'Player Object')
 
         self.add_input('NodeSocketFloat', 'Overall Speed Modifier', default_value=1.0)
 

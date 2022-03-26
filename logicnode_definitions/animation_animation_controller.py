@@ -24,8 +24,8 @@ class AnimationControllerNode(ArmLogicTreeNode):
         self.add_output('ArmNodeSocketAction', 'Done')
 
         self.add_input('ArmNodeSocketAction', 'In')
-        self.add_input('ArmNodeSocketObject', 'Animated Object', default_value='Animated Object')
-        self.add_input('ArmNodeSocketAnimAction', 'Idle', default_value='Idle')
+        self.add_input('ArmNodeSocketObject', 'Animated Object')
+        self.add_input('ArmNodeSocketAnimAction', 'Idle')
         self.add_input('NodeSocketFloat', 'Blend Time', default_value=0.2)
 
 
